@@ -2,7 +2,7 @@
 
 @section('site_content')
   <div class="p-4">
-    <h2 class="mb-4 text-gray-200">Nossos Produtos</h2>
+    <h2 class="mb-4 font-bold">Nossos Produtos</h2>
     <div class="row g-4">
         {{-- @foreach($products as $product)
         <div class="col-sm-6 col-lg-4 col-xl-3 d-flex align-items-stretch justify-content-center">

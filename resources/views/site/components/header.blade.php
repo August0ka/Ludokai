@@ -1,28 +1,28 @@
 <header>
     <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile_menu">
         {{-- <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"> --}}
-        <ul class="absolute h-full bg-gray-700 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+        <ul class="absolute h-full bg-blue-night-900 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
             <li>
                 <a href="#"
-                    class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0"
+                    class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700"
                     aria-current="page">Home</a>
             </li>
             <li>
                 <a href="#"
-                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 
+                    class="block py-2 pr-4 pl-3 text-gray-100 border-b border-gray-100 
                       lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Produto</a>
             </li>
             <li>
                 <a href="#"
-                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 
+                    class="block py-2 pr-4 pl-3 text-gray-100 border-b border-gray-100 
                     lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700
                     lg:p-0">Categoria</a>
             </li>
         </ul>
     </div>
-    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
-        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="https://flowbite.com" class="flex items-center">
+    <nav class="px-4 lg:px-6 py-2.5">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl text-gray-200">
+            <a href="/" class="flex items-center mb-3">
                 <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
                 <span class="self-center text-xl font-semibold whitespace-nowrap">Lojinha legal</span>
             </a>
@@ -44,18 +44,14 @@
                     </svg>
                 </button>
                 <div class="">
-                    <a href="#"
-                        class="text-gray-800 hover:bg-gray-50 focus:ring-4
-                          focus:ring-gray-300 font-medium rounded-lg text-sm lg:px-5 py-2 
-                          lg:py-2.5 focus:outline-none">
-                        Log in
-                    </a>
-                    <a href="#"
-                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4
-                         focus:ring-primary-300 font-medium rounded-lg text-sm lg:px-5 py-2
-                         lg:py-2.5 focus:outline-none">
+                    <button class="text-gray-100 bg-pumpkin-400 font-medium rounded-full text-xs px-3 py-1">
+                        Login
+                    </button>
+
+                    <button
+                        class="text-gray-100 bg-pumpkin-600 font-medium rounded-full text-xs px-3 py-1">
                         Cadastrar
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
