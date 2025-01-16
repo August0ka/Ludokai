@@ -28,10 +28,10 @@
                     </button>
                 </div>
                 <div class="">
-                    <button
+                    <a href="{{ route('site.login') }}"
                         class="text-gray-100 bg-pumpkin-400 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
                         Login
-                    </button>
+                    </a>
 
                     <button
                         class="text-gray-100 bg-pumpkin-600 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
