@@ -1,86 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <title>Registro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    @vite('resources/css/app.css')
 </head>
-<body class="bg-body-secondary">
-  <div class="container-fluid h-100 py-5 justify-content-center  align-content-center">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-header text-center">
-           <h4>Registrar</h4> 
-          </div>
-          <div class="card-body">
-            <form method="POST" action="{{ route('site.register.store') }}">
-              @csrf
-              <div class="row">
 
-                <div class="form-group mb-3 col-6">
-                  <label for="name">Nome</label>
-                  <input id="name" type="text" class="form-control" name="name" required autofocus>
-                </div>
-  
-                <div class="form-group mb-3 col-6">
-                  <label for="cpf">CPF</label>
-                  <input id="cpf" type="text" class="form-control" name="cpf" required autofocus>
-                </div>
-              </div>
+<body class="h-screen">
+    <div class="w-100 flex items-center justify-center px-4 h-full lg:h-full">
+        <div>
+            <div class="bg-pumpkin-500 text-gray-100 text-center py-2 md:py-4 rounded-t-lg">
+                <h4 class="text-lg md:text-xl font-bold">Cadastro</h4>
+            </div>
+            <div class="p-4 bg-vivid-violet-950 rounded-b-lg text-xs md:text-base">
+                <form method="POST" action="{{ route('site.store.user') }}">
+                    @csrf
+                    <div class="grid grid-cols-12 gap-x-2 md:gap-x-3 gap-y-2 md:gap-y-3">
+                        <div class="col-span-12 md:col-span-8">
+                            <label for="name" class="block text-pumpkin-300 font-medium mb-1">Nome</label>
+                            <input id="name" type="text"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="name" required autofocus>
+                        </div>
+                        <div class="col-span-5 md:col-span-4">
+                            <label for="cpf" class="block text-pumpkin-300 font-medium mb-1">CPF</label>
+                            <input id="cpf" type="text"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="cpf" required>
+                        </div>
+                        <div class="col-span-7 md:col-span-7">
+                            <label for="email" class="block text-pumpkin-300 font-medium mb-1">Email</label>
+                            <input id="email" type="email"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="email" required>
+                        </div>
+                        <div class="col-span-4 md:col-span-5">
+                            <label for="password" class="block text-pumpkin-300 font-medium mb-1">Senha</label>
+                            <input id="password" type="password"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="password" required>
+                        </div>
+                        <div class="col-span-8 md:col-span-12">
+                            <label for="address" class="block text-pumpkin-300 font-medium mb-1">Endereço</label>
+                            <input id="address" type="text"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="address" required>
+                        </div>
+                        <div class="col-span-6">
+                            <label for="city" class="block text-pumpkin-300 font-medium mb-1">Cidade</label>
+                            <input id="city" type="text"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="city" required>
+                        </div>
+                        <div class="col-span-6">
+                            <label for="state" class="block text-pumpkin-300 font-medium mb-1">Estado</label>
+                            <input id="state" type="text"
+                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                name="state" placeholder="Mato Grosso" required>
+                        </div>
+                        <div class="col-span-12 text-center">
+                            <button type="submit"
+                                class="bg-pumpkin-500 hover:bg-pumpkin-700 text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pumpkin-500">Registrar</button>
+                        </div>
+                    </div>
 
-              <div class="row">
-
-                <div class="form-group mb-3 col-6">
-                  <label for="email">Email</label>
-                  <input id="email" type="email" class="form-control" name="email" required>
-                </div>
-  
-                <div class="form-group mb-3 col-6">
-                  <label for="password">Senha</label>
-                  <input id="password" type="password" class="form-control" name="password" required>
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="address">Endereço</label>
-                <input id="address" type="text" class="form-control" name="address" required>
-              </div>
-
-              <div class="row">
-                <div class="form-group mb-3 col-8">
-                  <label for="city">Cidade</label>
-                  <input id="city" type="text" class="form-control" name="city" required>
-                </div>
-
-                <div class="form-group mb-3 col-4">
-                  <label for="state">Estado</label>
-                  <input id="state" type="text" class="form-control" name="state" placeholder="Mato Grosso" required>
-                </div>
-  
-              </div>
-
-              <div class="row text-end">
-                <div>
-                  <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-              </div>
-            </form>
-          </div>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#cpf').mask('000.000.000-00');
-    })
-</script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#cpf').mask('000.000.000-00');
+        })
+    </script>
+</body>
+
 </html>

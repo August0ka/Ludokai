@@ -41,4 +41,12 @@ class AuthController extends Controller
     {
         return view('site.register.index');
     }
+
+    public function store(Request $request)
+    {
+        
+        $this->userRepository->create(request()->all());
+
+        return redirect()->route('site.login');
+    }
 }
