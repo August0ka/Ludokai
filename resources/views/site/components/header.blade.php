@@ -5,7 +5,7 @@
                 <div class="flex items-center">
                     <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9"
                         alt="lojinha_legal_logo" />
-                    <span class="self-center text-xl md:text-2xl font-semibold whitespace-nowrap">Lojinha legal</span>
+                    <span class="self-center text-xl md:text-2xl font-semibold whitespace-nowrap">Ludokai</span>
                 </div>
             </a>
             <div class="col-span-12 h-10 bg-vivid-violet-950 flex items-center justify-between">
@@ -27,16 +27,25 @@
                         </svg>
                     </button>
                 </div>
-                <div class="">
+                <div>
+                    @auth
+                    <span class="text-gray-100 font-medium text-xs md:text-lg xl:text-base px-2">
+                        Olá, {{ substr(Auth::user()->name, 0, strpos(Auth::user()->name, ' ')) }}
+                    </span>
+                    <a href=""
+                        class="text-gray-100 mr-1 bg-pumpkin-400 hover:bg-pumpkin-500 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
+                        Meus Pedidos
+                    </a>
+                    <a href="{{ route('site.logout') }}"
+                        class="text-gray-100 mr-1 bg-pumpkin-600 hover:bg-pumpkin-700 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
+                        Sair
+                    </a>
+                    @else
                     <a href="{{ route('site.login') }}"
-                        class="text-gray-100 bg-pumpkin-400 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
+                        class="text-gray-100 mr-1F bg-pumpkin-400 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
                         Login
                     </a>
-
-                    <button
-                        class="text-gray-100 bg-pumpkin-600 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
-                        Cadastrar
-                    </button>
+                    @endauth
                 </div>
             </div>
         </div>

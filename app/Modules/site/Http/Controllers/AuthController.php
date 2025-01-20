@@ -44,8 +44,14 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        
         $this->userRepository->create(request()->all());
+
+        return redirect()->route('site.login');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
 
         return redirect()->route('site.login');
     }
