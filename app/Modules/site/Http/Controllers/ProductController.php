@@ -25,6 +25,11 @@ class ProductController extends Controller
   public function purchase(Product $product)
   {
     $user = auth()->user();
+
+    if (!$user) {
+      return redirect()->route('site.login');
+    }
+
     return view('site.product.purchase', compact('product', 'user'));
   }
 }

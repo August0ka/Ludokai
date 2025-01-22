@@ -32,7 +32,7 @@
                     <span class="text-gray-100 font-medium text-xs md:text-lg xl:text-base px-2">
                         Olá, {{ substr(Auth::user()->name, 0, strpos(Auth::user()->name, ' ')) }}
                     </span>
-                    <a href=""
+                    <a href="{{ route('site.mySales') }}"
                         class="text-gray-100 mr-1 bg-pumpkin-400 hover:bg-pumpkin-500 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
                         Meus Pedidos
                     </a>
