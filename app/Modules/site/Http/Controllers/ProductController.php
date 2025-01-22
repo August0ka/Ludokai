@@ -21,4 +21,10 @@ class ProductController extends Controller
 
     return view('site.product.index', compact('product', 'productImages'));
   }
+
+  public function purchase(Product $product)
+  {
+    $user = auth()->user();
+    return view('site.product.purchase', compact('product', 'user'));
+  }
 }
