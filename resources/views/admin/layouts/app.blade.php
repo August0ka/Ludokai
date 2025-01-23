@@ -28,28 +28,28 @@
                     <ul class="space-y-4">
                         <li>
                             <a class="flex items-center space-x-2 text-gray-900 dark:text-gray-100"
-                                href="{{ route('users.index') }}">
+                                href="">
                                 <i class="bi bi-people"></i>
                                 <span>Usuários</span>
                             </a>
                         </li>
                         <li>
                             <a class="flex items-center space-x-2 text-gray-900 dark:text-gray-100"
-                                href="{{ route('products.index') }}">
+                                href="">
                                 <i class="bi bi-shop"></i>
                                 <span>Produtos</span>
                             </a>
                         </li>
                         <li>
                             <a class="flex items-center space-x-2 text-gray-900 dark:text-gray-100"
-                                href="{{ route('categories.index') }}">
+                                href="">
                                 <i class="bi bi-tags"></i>
                                 <span>Categorias</span>
                             </a>
                         </li>
                         <li>
                             <a class="flex items-center space-x-2 text-gray-900 dark:text-gray-100"
-                                href="{{ route('sales.index') }}">
+                                href="">
                                 <i class="bi bi-cash-coin"></i>
                                 <span>Vendas</span>
                             </a>

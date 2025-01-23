@@ -13,8 +13,18 @@ class AdminAuthController extends Controller
 
     public function index()
     {
-        $products = $this->productRepository->fetchAll();
+        return view('admin.login.index');
+    }
 
-        return view('admin.products.index', compact('products'));
+    public function login()
+    {
+        return view('admin.login');
+    }
+
+    public function logout()
+    {
+        auth('admin')->logout();
+
+        return redirect()->route('admin.login');
     }
 }

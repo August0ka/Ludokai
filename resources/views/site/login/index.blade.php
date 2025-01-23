@@ -12,10 +12,10 @@
   <section class="h-screen flex items-center justify-center">
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap items-center justify-center h-full">
-        <div class="w-full md:w-1/2 lg:w-1/3">
-          <img class="w-full mb-6" src="{{ asset('chocoVersusFundo.png') }}" alt="ChocoVersus.png">
+        <div class="flex justify-center w-full lg:w-1/3">
+          <img class="h-40 md:h-48 lg:h-52 lg:mr-10 xl:mr-0" src="{{ asset('images/banner.svg') }}" alt="ludokai.png">
         </div>
-        <div class="w-full md:w-1/2 lg:w-1/3 bg-vivid-violet-950 rounded-lg shadow-lg p-6">
+        <div class="w-full md:w-96 lg:w-1/3 bg-vivid-violet-950 rounded-lg shadow-lg p-6">
           @if($errors->has('login_errors'))
           <span class="text-red-500 text-center text-sm mt-1 block">{{$errors->first('login_errors')}}</span>
           @endif

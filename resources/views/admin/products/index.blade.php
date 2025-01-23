@@ -7,7 +7,7 @@
         </div>
 
         <div class="mt-2 mb-2 flex justify-end">
-            <a href="{{ route('products.create') }}"
+            <a href=""
                 class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow">Novo Produto</a>
         </div>
 
@@ -36,7 +36,7 @@
                             <td class="border px-4 py-2">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</td>
                             <td class="border px-4 py-2">{{ $product->quantity }}</td>
                             <td class="border px-4 py-2">
-                                <a href="{{ route('products.edit', $product->id) }}"
+                                <a href=""
                                     class="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-2 rounded shadow"
                                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editar produto">
                                     <i class="bi bi-pencil-square"></i>
@@ -53,7 +53,7 @@
                         <!-- Delete Product Modal -->
                         <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
                             id="deleteModal{{ $product->id }}">
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                            <form action="" method="POST"
                                 class="bg-white rounded-lg shadow-lg overflow-hidden">
                                 @csrf
                                 @method('DELETE')
