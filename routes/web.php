@@ -1,7 +1,9 @@
 <?php
 
 use App\Modules\admin\Http\Controllers\AdminAuthController;
+use App\Modules\admin\Http\Controllers\AdminCategoryController;
 use App\Modules\admin\Http\Controllers\AdminProductController;
+use App\Modules\admin\Http\Controllers\AdminUserController;
 use App\Modules\site\Http\Controllers\ProductController;
 use App\Modules\site\Http\Controllers\AuthController;
 use App\Modules\site\Http\Controllers\HomeController;
@@ -31,6 +33,8 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/', [AdminAuthController::class, 'index'])->name('admin.products');
-    Route::resource('products', AdminProductController::class)->names('admin.products');
-});
 
+    Route::resource('categories', AdminCategoryController::class)->names('admin.categories');
+    Route::resource('products', AdminProductController::class)->names('admin.products');
+    Route::resource('users', AdminUserController::class)->names('admin.users');
+});

@@ -19,4 +19,11 @@ class UserRepository extends BaseRepository
             ->where('email', $email)
             ->first();
     }
+
+    public function fetchAll() 
+    {
+        return $this->model
+            ->newQuery()
+            ->get();
+    }
 }
