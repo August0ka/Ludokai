@@ -5,14 +5,14 @@
         <div class="flex justify-between items-center mt-5">
             <div class="text-2xl font-bold text-pumpkin-200">Usuários</div>
             <div class="my-2">
-                <button
+                <a href="{{ route('admin.users.create') }}"
                     class="flex items-center bg-pumpkin-500 hover:bg-pumpkin-600 text-white py-1 px-4 rounded-full shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="text-white size-4 mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Adicionar
-                </button>
+                </a>
             </div>
         </div>
 

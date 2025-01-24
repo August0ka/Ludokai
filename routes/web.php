@@ -1,8 +1,9 @@
 <?php
 
-use App\Modules\admin\Http\Controllers\AdminAuthController;
 use App\Modules\admin\Http\Controllers\AdminCategoryController;
 use App\Modules\admin\Http\Controllers\AdminProductController;
+use App\Modules\admin\Http\Controllers\AdminAuthController;
+use App\Modules\admin\Http\Controllers\AdminSaleController;
 use App\Modules\admin\Http\Controllers\AdminUserController;
 use App\Modules\site\Http\Controllers\ProductController;
 use App\Modules\site\Http\Controllers\AuthController;
@@ -37,4 +38,5 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::resource('categories', AdminCategoryController::class)->names('admin.categories');
     Route::resource('products', AdminProductController::class)->names('admin.products');
     Route::resource('users', AdminUserController::class)->names('admin.users');
+    Route::resource('sales', AdminSaleController::class)->names('admin.sales');
 });
