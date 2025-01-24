@@ -11,4 +11,12 @@ class AdminRepository extends BaseRepository
     {
         parent::__construct($model);
     }
+
+    public function findByEmail(string $email)
+    {
+        return $this->model
+            ->newQuery()
+            ->where('email', $email)
+            ->first();
+    }
 }

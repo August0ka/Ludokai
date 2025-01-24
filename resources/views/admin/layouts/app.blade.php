@@ -11,12 +11,15 @@
     <title>Ludokai Admin</title>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body>
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <nav id="sidebarMenu" class="w-64 bg-gray-200 dark:bg-gray-800 p-4 shadow-md">
+        <nav id="sidebarMenu" class="bg-vivid-violet-950 w-64 p-4 shadow-md">
+            <div class="flex justify-center">
+                <img class="h-20" src="{{ asset('images/banner.svg') }}" alt="Ludokai_banner">
+            </div>
             <div class="flex flex-col h-full">
-                <ul class="mt-10 mb-4 space-y-4">
+                <ul class="mb-4 space-y-4">
                     <li>
                         <button id="btnSwitch"
                             class="btn-theme-toggle w-full px-4 py-2 bg-gray-800 text-white dark:bg-gray-200 dark:text-black rounded shadow">

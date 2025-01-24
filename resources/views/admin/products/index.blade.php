@@ -1,14 +1,13 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="container mx-auto px-4">
-        <div class="mt-5">
-            <h3 class="text-lg font-bold">Produtos</h3>
-        </div>
-
-        <div class="mt-2 mb-2 flex justify-end">
-            <a href=""
-                class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow">Novo Produto</a>
+    <div class="container mx-auto">
+        <div class="flex justify-between items-center mt-5">
+            <div class="text-xl font-bold text-pumpkin-200">Produtos</div>
+            <div class="mt-2 mb-2 flex justify-end">
+                <a href=""
+                    class="bg-pumpkin-500 hover:bg-pumpkin-600 text-white py-1 px-4 rounded-full shadow">Adicionar</a>
+            </div>
         </div>
 
         @if (session('success'))
@@ -17,25 +16,25 @@
             </div>
         @endif
 
-        <div class="overflow-x-auto shadow-md rounded-lg mt-5">
-            <table class="table-auto w-full border-collapse bg-white rounded-lg">
+        <div class="rounded-lg mt-5">
+            <table class="table-auto text-sm w-full border-collapse rounded-lg overflow-hidden">
                 <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border px-4 py-2">#</th>
-                        <th class="border px-4 py-2">Nome</th>
-                        <th class="border px-4 py-2">Preço</th>
-                        <th class="border px-4 py-2">Quantidade</th>
-                        <th class="border px-4 py-2">Ações</th>
+                    <tr class="bg-pumpkin-800 text-gray-200">
+                        <th class="px-4 py-1">#</th>
+                        <th class="px-4 py-1">Nome</th>
+                        <th class="px-4 py-1">Preço</th>
+                        <th class="px-4 py-1">Quantidade</th>
+                        <th class="px-4 py-1">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($products as $product)
-                        <tr class="odd:bg-white even:bg-gray-50">
-                            <td class="border px-4 py-2">{{ $product->id }}</td>
-                            <td class="border px-4 py-2">{{ $product->name }}</td>
-                            <td class="border px-4 py-2">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</td>
-                            <td class="border px-4 py-2">{{ $product->quantity }}</td>
-                            <td class="border px-4 py-2">
+                        <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
+                            <td class="px-4 py-2">{{ $product->id }}</td>
+                            <td class="px-4 py-2">{{ $product->name }}</td>
+                            <td class="px-4 py-2">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</td>
+                            <td class="px-4 py-2">{{ $product->quantity }}</td>
+                            <td class="px-4 py-2">
                                 <a href=""
                                     class="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-2 rounded shadow"
                                     data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Editar produto">
@@ -49,27 +48,7 @@
                                     <i class="bi bi-trash3"></i>
                                 </button>
                             </td>
-                        </tr>
-                        <!-- Delete Product Modal -->
-                        <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
-                            id="deleteModal{{ $product->id }}">
-                            <form action="" method="POST"
-                                class="bg-white rounded-lg shadow-lg overflow-hidden">
-                                @csrf
-                                @method('DELETE')
-                                <div class="p-6">
-                                    <h5 class="text-lg font-bold">Excluir produto</h5>
-                                    <p class="mt-4">Deseja remover <strong>{{ $product->name }}</strong> ?</p>
-                                </div>
-                                <div class="flex justify-end space-x-4 p-4 bg-gray-100">
-                                    <button type="button"
-                                        class="btn btn-danger bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-                                        data-bs-dismiss="modal">Não</button>
-                                    <button type="submit"
-                                        class="btn btn-success bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Sim</button>
-                                </div>
-                            </form>
-                        </div>
+                        </tr>   
                     @endforeach
                 </tbody>
             </table>

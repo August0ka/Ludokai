@@ -15,7 +15,7 @@
                 <img class="mx-auto h-20 lg:h-28" src="{{ asset('images/banner.svg') }}" alt="Ludokai.png">
             </div>
             <div class="px-6 py-4">
-                <form method="POST" action="{{ route('login.auth') }}">
+                <form method="POST" action="{{ route('admin.authenticate') }}">
                     @csrf
                     <div class="mb-4">
                         <label for="email" class="block text-pumpkin-300 text-sm font-bold mb-2">Email</label>

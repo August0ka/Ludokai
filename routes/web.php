@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\admin\Http\Controllers\AdminAuthController;
+use App\Modules\admin\Http\Controllers\AdminProductController;
 use App\Modules\site\Http\Controllers\ProductController;
 use App\Modules\site\Http\Controllers\AuthController;
 use App\Modules\site\Http\Controllers\HomeController;
@@ -23,11 +24,13 @@ Route::resource('sales',  SaleController::class);
 // Admin routes
 Route::prefix('admin')->group(function () {
     Route::post('login/auth', [AdminAuthController::class, 'login'])->name('login.auth');
+    Route::post('authenticate', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
     Route::get('login', [AdminAuthController::class, 'index'])->name('admin.login');
 });
 
 Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/', [AdminAuthController::class, 'index'])->name('admin.products');
+    Route::resource('products', AdminProductController::class)->names('admin.products');
 });
 
