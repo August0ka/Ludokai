@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,15 +45,15 @@ class DatabaseSeeder extends Seeder
 
         // Insert into users
         DB::table('users')->insert([
-            ['id' => 1, 'name' => 'User 1', 'email' => 'user1@example.com', 'cpf' => '111.111.111-11', 'address' => 'Address 1', 'city' => 'City A', 'state' => 'State A', 'password' => 'password1', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 2, 'name' => 'User 2', 'email' => 'user2@example.com', 'cpf' => '222.222.222-22', 'address' => 'Address 2', 'city' => 'City B', 'state' => 'State B', 'password' => 'password2', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 3, 'name' => 'User 3', 'email' => 'user3@example.com', 'cpf' => '333.333.333-33', 'address' => 'Address 3', 'city' => 'City C', 'state' => 'State C', 'password' => 'password3', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 4, 'name' => 'User 4', 'email' => 'user4@example.com', 'cpf' => '444.444.444-44', 'address' => 'Address 4', 'city' => 'City D', 'state' => 'State D', 'password' => 'password4', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 5, 'name' => 'User 5', 'email' => 'user5@example.com', 'cpf' => '555.555.555-55', 'address' => 'Address 5', 'city' => 'City E', 'state' => 'State E', 'password' => 'password5', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 6, 'name' => 'User 6', 'email' => 'user6@example.com', 'cpf' => '666.666.666-66', 'address' => 'Address 6', 'city' => 'City F', 'state' => 'State F', 'password' => 'password6', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 7, 'name' => 'User 7', 'email' => 'user7@example.com', 'cpf' => '777.777.777-77', 'address' => 'Address 7', 'city' => 'City G', 'state' => 'State G', 'password' => 'password7', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 8, 'name' => 'User 8', 'email' => 'user8@example.com', 'cpf' => '888.888.888-88', 'address' => 'Address 8', 'city' => 'City H', 'state' => 'State H', 'password' => 'password8', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 9, 'name' => 'User 9', 'email' => 'user9@example.com', 'cpf' => '999.999.999-99', 'address' => 'Address 9', 'city' => 'City I', 'state' => 'State I', 'password' => 'password9', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 1, 'name' => 'User 1', 'email' => 'user1@example.com', 'cpf' => '111.111.111-11', 'address' => 'Address 1', 'city' => 'City A', 'state' => 'State A', 'password' => Hash::make('123456'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 2, 'name' => 'User 2', 'email' => 'user2@example.com', 'cpf' => '222.222.222-22', 'address' => 'Address 2', 'city' => 'City B', 'state' => 'State B', 'password' => Hash::make('password2'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 3, 'name' => 'User 3', 'email' => 'user3@example.com', 'cpf' => '333.333.333-33', 'address' => 'Address 3', 'city' => 'City C', 'state' => 'State C', 'password' => Hash::make('password3'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'name' => 'User 4', 'email' => 'user4@example.com', 'cpf' => '444.444.444-44', 'address' => 'Address 4', 'city' => 'City D', 'state' => 'State D', 'password' => Hash::make('password4'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 5, 'name' => 'User 5', 'email' => 'user5@example.com', 'cpf' => '555.555.555-55', 'address' => 'Address 5', 'city' => 'City E', 'state' => 'State E', 'password' => Hash::make('password5'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 6, 'name' => 'User 6', 'email' => 'user6@example.com', 'cpf' => '666.666.666-66', 'address' => 'Address 6', 'city' => 'City F', 'state' => 'State F', 'password' => Hash::make('password6'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 7, 'name' => 'User 7', 'email' => 'user7@example.com', 'cpf' => '777.777.777-77', 'address' => 'Address 7', 'city' => 'City G', 'state' => 'State G', 'password' => Hash::make('password7'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 8, 'name' => 'User 8', 'email' => 'user8@example.com', 'cpf' => '888.888.888-88', 'address' => 'Address 8', 'city' => 'City H', 'state' => 'State H', 'password' => Hash::make('password8'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 9, 'name' => 'User 9', 'email' => 'user9@example.com', 'cpf' => '999.999.999-99', 'address' => 'Address 9', 'city' => 'City I', 'state' => 'State I', 'password' => Hash::make('password9'), 'created_at' => now(), 'updated_at' => now()],
             ['id' => 10, 'name' => 'User 10', 'email' => 'user10@example.com', 'cpf' => '000.000.000-00', 'address' => 'Address 10', 'city' => 'City J', 'state' => 'State J', 'password' => 'password10', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
