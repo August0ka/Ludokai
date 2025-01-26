@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -17,16 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // Insert into admins
         DB::table('admins')->insert([
-            ['id' => 1, 'name' => 'Admin 1', 'email' => 'admin1@example.com', 'password' => 'password1', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 2, 'name' => 'Admin 2', 'email' => 'admin2@example.com', 'password' => 'password2', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 3, 'name' => 'Admin 3', 'email' => 'admin3@example.com', 'password' => 'password3', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 4, 'name' => 'Admin 4', 'email' => 'admin4@example.com', 'password' => 'password4', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 5, 'name' => 'Admin 5', 'email' => 'admin5@example.com', 'password' => 'password5', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 6, 'name' => 'Admin 6', 'email' => 'admin6@example.com', 'password' => 'password6', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 7, 'name' => 'Admin 7', 'email' => 'admin7@example.com', 'password' => 'password7', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 8, 'name' => 'Admin 8', 'email' => 'admin8@example.com', 'password' => 'password8', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 9, 'name' => 'Admin 9', 'email' => 'admin9@example.com', 'password' => 'password9', 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 10, 'name' => 'Admin 10', 'email' => 'admin10@example.com', 'password' => 'password10', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 1, 'name' => 'Admin 1', 'email' => 'admin1@example.com', 'password' => Hash::make('123456'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 2, 'name' => 'Admin 2', 'email' => 'admin2@example.com', 'password' => Hash::make('password2'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 3, 'name' => 'Admin 3', 'email' => 'admin3@example.com', 'password' => Hash::make('password3'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 4, 'name' => 'Admin 4', 'email' => 'admin4@example.com', 'password' => Hash::make('password4'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 5, 'name' => 'Admin 5', 'email' => 'admin5@example.com', 'password' => Hash::make('password5'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 6, 'name' => 'Admin 6', 'email' => 'admin6@example.com', 'password' => Hash::make('password6'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 7, 'name' => 'Admin 7', 'email' => 'admin7@example.com', 'password' => Hash::make('password7'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 8, 'name' => 'Admin 8', 'email' => 'admin8@example.com', 'password' => Hash::make('password8'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 9, 'name' => 'Admin 9', 'email' => 'admin9@example.com', 'password' => Hash::make('password9'), 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 10, 'name' => 'Admin 10', 'email' => 'admin10@example.com', 'password' => Hash::make('password10'), 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         // Insert into categories
@@ -54,7 +52,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 7, 'name' => 'User 7', 'email' => 'user7@example.com', 'cpf' => '777.777.777-77', 'address' => 'Address 7', 'city' => 'City G', 'state' => 'State G', 'password' => Hash::make('password7'), 'created_at' => now(), 'updated_at' => now()],
             ['id' => 8, 'name' => 'User 8', 'email' => 'user8@example.com', 'cpf' => '888.888.888-88', 'address' => 'Address 8', 'city' => 'City H', 'state' => 'State H', 'password' => Hash::make('password8'), 'created_at' => now(), 'updated_at' => now()],
             ['id' => 9, 'name' => 'User 9', 'email' => 'user9@example.com', 'cpf' => '999.999.999-99', 'address' => 'Address 9', 'city' => 'City I', 'state' => 'State I', 'password' => Hash::make('password9'), 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 10, 'name' => 'User 10', 'email' => 'user10@example.com', 'cpf' => '000.000.000-00', 'address' => 'Address 10', 'city' => 'City J', 'state' => 'State J', 'password' => 'password10', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => 10, 'name' => 'User 10', 'email' => 'user10@example.com', 'cpf' => '000.000.000-00', 'address' => 'Address 10', 'city' => 'City J', 'state' => 'State J', 'password' => Hash::make('password10'), 'created_at' => now(), 'updated_at' => now()],
         ]);
 
         DB::table('products')->insert([
