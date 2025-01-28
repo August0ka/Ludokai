@@ -93,17 +93,16 @@
                         type: "delete",
                         url: "{{ route('admin.users.destroy', $user->id) }}",
                         success: function(response) {
-                            if(!response.success) {                             
+                            if (!response.success) {
                                 return Swal.fire({
                                     title: "Erro",
                                     text: response.message,
                                     icon: "error",
                                 });
                             }
+                            return window.location.reload();
                         }
                     });
-                } else if (result.isDenied) {
-
                 }
             });
         });

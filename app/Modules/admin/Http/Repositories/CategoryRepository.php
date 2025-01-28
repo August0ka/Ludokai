@@ -18,4 +18,11 @@ class CategoryRepository extends BaseRepository
             ->newQuery()
             ->get();
     }
+
+    public function pluck()
+    {
+        return $this->model
+            ->newQuery()
+            ->pluck('name', 'id');
+    }
 }

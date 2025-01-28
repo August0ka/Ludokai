@@ -5,14 +5,14 @@
         <div class="flex justify-between items-center mt-5">
             <div class="text-2xl font-bold text-pumpkin-200">Produtos</div>
             <div class="my-2">
-                <button
+                <a href="{{ route('admin.products.create') }}"
                     class="flex items-center bg-pumpkin-500 hover:bg-pumpkin-600 text-white py-1 px-4 rounded-full shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="text-white size-4 mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Adicionar
-                </button>
+                </a>
             </div>
         </div>
 
@@ -29,6 +29,7 @@
                         <th class="px-4 py-1">#</th>
                         <th class="px-4 py-1">Nome</th>
                         <th class="px-4 py-1">Preço</th>
+                        <th class="px-4 py-1">Categoria</th>
                         <th class="px-4 py-1">Quantidade</th>
                         <th class="px-4 py-1">Ações</th>
                     </tr>
@@ -39,19 +40,20 @@
                             <td class="px-4 py-2">{{ $product->id }}</td>
                             <td class="px-4 py-2">{{ $product->name }}</td>
                             <td class="px-4 py-2">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</td>
+                            <td class="px-4 py-2">{{ $product->category->name }}</td>
                             <td class="px-4 py-2">{{ $product->quantity }}</td>
                             <td class="flex px-4 py-2">
-                                <button
+                                <a href="{{ route('admin.products.edit', $product->id) }}"
                                     class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 mr-1.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="text-pumpkin-100 size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                                     </svg>
-                                </button>
+                                </a>
 
                                 <button type="button"
-                                    class="flex items-center justify-center bg-pink-700 hover:bg-pink-600 rounded-full p-1">
+                                    class="delete-button flex items-center justify-center bg-pink-700 hover:bg-pink-600 rounded-full p-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="text-pumpkin-100 size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -69,17 +71,37 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.delete-button').on('click', function() {
-                let productId = $(this).data('button-modal');
-
-                $(`#deleteModal${productId}`).removeClass('hidden').addClass('flex');
-            });
-
-            $('[data-bs-dismiss="modal"]').on('click', function() {
-                $(this).closest('.modal').removeClass('flex').addClass('hidden');
+<script>
+    $(document).ready(function() {
+        $(".delete-button").on('click', function() {
+            Swal.fire({
+                title: "Tem certeza que deseja deletar ?",
+                text: "Esse processo é irreversível",
+                showDenyButton: true,
+                confirmButtonText: "Sim",
+                denyButtonText: "Não"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                        },
+                        type: "delete",
+                        url: "{{ route('admin.products.destroy', $product->id) }}",
+                        success: function(response) {
+                            if (!response.success) {
+                                return Swal.fire({
+                                    title: "Erro",
+                                    text: response.message,
+                                    icon: "error",
+                                });
+                            }
+                            return window.location.reload();
+                        }
+                    });
+                }
             });
         });
-    </script>
+    });
+</script>
 @endsection

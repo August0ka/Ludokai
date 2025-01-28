@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <script>
-        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
-    </script>
     <title>Ludokai Admin</title>
 </head>
 
@@ -100,44 +97,9 @@
         </main>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-
-        $(document).ready(function() {
-            let storedTheme = localStorage.getItem('theme') || 'dark';
-            localStorage.setItem('theme', storedTheme);
-
-            if (storedTheme === 'light') {
-                applyLightTheme();
-            } else {
-                applyDarkTheme();
-            }
-
-            $('#btnSwitch').click(function() {
-                let currentTheme = $('html').attr('data-theme');
-                if (currentTheme === 'dark') {
-                    applyLightTheme();
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    applyDarkTheme();
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-
-            function applyLightTheme() {
-                $('#themeIcon').removeClass('bi-brightness-high').addClass('bi-moon-stars');
-                $('html').attr('data-theme', 'light');
-            }
-
-            function applyDarkTheme() {
-                $('#themeIcon').removeClass('bi-moon-stars').addClass('bi-brightness-high');
-                $('html').attr('data-theme', 'dark');
-            }
-        });
-    </script>
 
     @yield('scripts')
 </body>
