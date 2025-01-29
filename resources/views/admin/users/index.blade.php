@@ -26,26 +26,26 @@
         <table class="table-auto text-sm w-full border-collapse rounded-lg overflow-hidden">
             <thead>
                 <tr class="bg-pumpkin-800 text-gray-200">
-                    <th class="px-4 py-1">#</th>
-                    <th class="px-4 py-1">Nome</th>
-                    <th class="px-4 py-1">Email</th>
-                    <th class="px-4 py-1">CPF</th>
-                    <th class="px-4 py-1">Endereço</th>
-                    <th class="px-4 py-1">Cidade</th>
-                    <th class="px-4 py-1">Estado</th>
-                    <th class="px-4 py-1">Ações</th>
+                    <th class="px-4 py-1 text-left">#</th>
+                    <th class="px-4 py-1 text-left">Nome</th>
+                    <th class="px-4 py-1 text-left">Email</th>
+                    <th class="px-4 py-1 text-left">CPF</th>
+                    <th class="px-4 py-1 text-left">Endereço</th>
+                    <th class="px-4 py-1 text-left">Cidade</th>
+                    <th class="px-4 py-1 text-left">Estado</th>
+                    <th class="px-4 py-1 text-left">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
                 <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
-                    <td class="px-4 py-2">{{ $user->id }}</td>
-                    <td class="px-4 py-2">{{ $user->name }}</td>
-                    <td class="px-4 py-2">{{ $user->email }}</td>
-                    <td class="px-4 py-2">{{ $user->cpf }}</td>
-                    <td class="px-4 py-2">{{ $user->address }}</td>
-                    <td class="px-4 py-2">{{ $user->city }}</td>
-                    <td class="px-4 py-2">{{ $user->state }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->id }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->name }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->email }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->cpf }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->address }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->city }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->state }}</td>
                     <td class="flex px-4 py-2">
                         <a href="{{ route('admin.users.edit', $user->id) }}"
                             class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 mr-1.5">

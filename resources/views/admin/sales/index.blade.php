@@ -26,24 +26,24 @@
         <table class="table-auto text-sm w-full border-collapse rounded-lg overflow-hidden">
             <thead>
                 <tr class="bg-pumpkin-800 text-gray-200">
-                    <th class="px-4 py-1">#</th>
-                    <th class="px-4 py-1">Comprador</th>
-                    <th class="px-4 py-1">Produto</th>
-                    <th class="px-4 py-1">Valor</th>
-                    <th class="px-4 py-1">Quantidade</th>
-                    <th class="px-4 py-1">Total</th>
-                    <th class="px-4 py-1">Ações</th>
+                    <th class="px-4 py-1 text-left">#</th>
+                    <th class="px-4 py-1 text-left">Comprador</th>
+                    <th class="px-4 py-1 text-left">Produto</th>
+                    <th class="px-4 py-1 text-left">Valor</th>
+                    <th class="px-4 py-1 text-left">Quantidade</th>
+                    <th class="px-4 py-1 text-left">Total</th>
+                    <th class="px-4 py-1 text-left">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($sales as $sale)
                 <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
-                    <td class="px-4 py-2">{{ $sale->id }}</td>
-                    <td class="px-4 py-2">{{ $sale->user->name }}</td>
-                    <td class="px-4 py-2">{{ $sale->product->name }}</td>
-                    <td class="px-4 py-2">{{ 'R$ ' . number_format($sale->value, 2, ',', '.') }}</td>
-                    <td class="px-4 py-2">{{ $sale->quantity }}</td>
-                    <td class="px-4 py-2">{{ 'R$ ' . number_format($sale->total, 2, ',', '.') }}</td>
+                    <td class="px-4 py-2 text-left">{{ $sale->id }}</td>
+                    <td class="px-4 py-2 text-left">{{ $sale->user->name }}</td>
+                    <td class="px-4 py-2 text-left">{{ $sale->product->name }}</td>
+                    <td class="px-4 py-2 text-left">{{ 'R$ ' . number_format($sale->value, 2, ',', '.') }}</td>
+                    <td class="px-4 py-2 text-left">{{ $sale->quantity }}</td>
+                    <td class="px-4 py-2 text-left">{{ 'R$ ' . number_format($sale->total, 2, ',', '.') }}</td>
                     <td class="flex px-4 py-2">
                         <a href="{{ route('admin.sales.edit', $sale->id) }}"
                             class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 mr-1.5">

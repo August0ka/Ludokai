@@ -26,16 +26,16 @@
         <table class="table-auto text-sm w-full border-collapse rounded-lg overflow-hidden">
             <thead>
                 <tr class="bg-pumpkin-800 text-gray-200">
-                    <th class="px-4 py-1">#</th>
-                    <th class="px-4 py-1">Nome</th>
-                    <th class="px-4 py-1">Ações</th>
+                    <th class="px-4 py-1 text-left">#</th>
+                    <th class="px-4 py-1 text-left">Nome</th>
+                    <th class="px-4 py-1 text-left">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
                 <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
-                    <td class="px-4 py-2">{{ $category->id }}</td>
-                    <td class="px-4 py-2">{{ $category->name }}</td>
+                    <td class="px-4 py-2 text-left">{{ $category->id }}</td>
+                    <td class="px-4 py-2 text-left">{{ $category->name }}</td>
                     <td class="flex px-4 py-2">
                         <a href="{{ route('admin.categories.edit', $category->id) }}"
                             class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 mr-1.5">
