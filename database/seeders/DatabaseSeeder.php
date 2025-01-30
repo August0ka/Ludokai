@@ -47,8 +47,8 @@ class DatabaseSeeder extends Seeder
         }
 
         $users = [
-            ['name' => 'User 1', 'email' => 'user1@example.com', 'cpf' => '111.111.111-11', 'address' => 'Address 1', 'city' => 'City A', 'state' => 'State A', 'password' => '123456'],
-            ['name' => 'User 2', 'email' => 'user2@example.com', 'cpf' => '222.222.222-22', 'address' => 'Address 2', 'city' => 'City B', 'state' => 'State B', 'password' => 'password2'],
+            ['name' => 'User 1', 'email' => 'user1@example.com', 'cpf' => '111.111.111-11', 'address' => 'Address 1', 'city' => 'City A', 'state' => '11', 'password' => '123456'],
+            ['name' => 'User 2', 'email' => 'user2@example.com', 'cpf' => '222.222.222-22', 'address' => 'Address 2', 'city' => 'City B', 'state' => '12', 'password' => 'password2'],
         ];
 
         foreach ($users as $user) {

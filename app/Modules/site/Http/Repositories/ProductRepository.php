@@ -16,6 +16,7 @@ class ProductRepository extends BaseRepository
     {
         return $this->model
             ->newQuery()
+            ->orderBy('id', 'desc')
             ->get();
     }
 }

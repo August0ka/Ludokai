@@ -4,8 +4,10 @@ namespace App\Modules\admin\Http\Controllers;
 
 use App\Modules\site\Http\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Throwable;
 
 class AdminUserController extends Controller
@@ -17,13 +19,16 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = $this->userRepository->fetchAll();
+        $states = $this->getStates();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'states'));
     }
 
     public function create()
     {
-        return view('admin.users.form');
+        $states = $this->getStates();
+
+        return view('admin.users.form', compact('states'));
     }
 
     public function store(Request $request)
@@ -37,14 +42,21 @@ class AdminUserController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.users.form', compact('user'));
+        $states = $this->getStates();
+        return view('admin.users.form', compact('user', 'states'));
     }
 
     public function update(Request $request, User $user)
     {
         $inputs = $request->except('_token', '_method');
 
-        $this->userRepository->update($user->id, $inputs);
+        if (isset($inputs['password'])) {
+            $inputs['password'] = Hash::make($inputs['password']);
+        } else {
+            unset($inputs['password']);
+        }
+
+        $this->userRepository->update($inputs, $user->id);
 
         return redirect()->route('admin.users.index');
     }
@@ -58,5 +70,17 @@ class AdminUserController extends Controller
         } catch (Throwable $th) {
             return response()->json(['success' => false, 'message' => $th->getMessage()]);
         }
+    }
+
+    public function getStates() 
+    {
+        $statesArray = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')->json();
+
+        $states = [];
+        foreach ($statesArray as $state) {
+            $states[$state['id']] = $state['nome'];
+        }
+
+        return $states;
     }
 }

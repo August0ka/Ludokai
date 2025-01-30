@@ -24,6 +24,7 @@ class UserRepository extends BaseRepository
     {
         return $this->model
             ->newQuery()
+            ->orderBy('id', 'desc')
             ->get();
     }
 }

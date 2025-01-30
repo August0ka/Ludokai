@@ -45,7 +45,7 @@
                     <td class="px-4 py-2 text-left">{{ $user->cpf }}</td>
                     <td class="px-4 py-2 text-left">{{ $user->address }}</td>
                     <td class="px-4 py-2 text-left">{{ $user->city }}</td>
-                    <td class="px-4 py-2 text-left">{{ $user->state }}</td>
+                    <td class="px-4 py-2 text-left">{{ $user->state ? $states[$user->state] : '' }}</td>
                     <td class="flex px-4 py-2">
                         <a href="{{ route('admin.users.edit', $user->id) }}"
                             class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 rounded-full p-1 mr-1.5">

@@ -61,11 +61,22 @@
                     class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                     required>
             </div>
-            <div class="col-span-2 lg:col-span-6">
+            <div class="col-span-1 lg:col-span-6">
                 <label for="state" class="block text-sm font-medium text-pumpkin-400">Estado</label>
-                <input type="text" id="state" name="state" value="{{ isset($user) ? $user->state : '' }}"
-                    class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
-                    required>
+                <select
+                    name="state"
+                    id="state"
+                    class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
+                    <option value="">Selecione...</option>
+                    @foreach ($states as $index => $state)
+                    <option 
+                        value="{{ $index }}" 
+                        {{ isset($user) && $user->state == $index ? 'selected' : '' }}
+                    >
+                        {{ $state }}
+                    </option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-span-2 lg:col-span-12 text-center">
                 <button type="submit"
