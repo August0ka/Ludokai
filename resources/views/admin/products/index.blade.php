@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @forelse ($products as $product)
                         <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
                             <td class="px-4 py-2 text-left">{{ $product->id }}</td>
                             <td class="px-4 py-2 text-left">{{ $product->name }}</td>
@@ -63,7 +63,11 @@
                                 </button>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
+                            <td colspan="6" class="text-center py-2">Nenhum registro encontrado</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -71,37 +75,42 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function() {
-        $(".delete-button").on('click', function() {
-            Swal.fire({
-                title: "Tem certeza que deseja deletar ?",
-                text: "Esse processo é irreversível",
-                showDenyButton: true,
-                confirmButtonText: "Sim",
-                denyButtonText: "Não"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                        },
-                        type: "delete",
-                        url: "{{ route('admin.products.destroy', $product->id) }}",
-                        success: function(response) {
-                            if (!response.success) {
-                                return Swal.fire({
-                                    title: "Erro",
-                                    text: response.message,
-                                    icon: "error",
-                                });
-                            }
-                            return window.location.reload();
+    <script>
+        $(document).ready(function() {
+            $(".delete-button").on('click', function() {
+                Swal.fire({
+                    title: "Tem certeza que deseja deletar ?",
+                    text: "Esse processo é irreversível",
+                    showDenyButton: true,
+                    confirmButtonText: "Sim",
+                    denyButtonText: "Não"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url =
+                            {{ !isset($product) ? null : route('admin.products.destroy', $product->id) }}
+
+                        if (productId != null) {
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                                },
+                                type: "delete",
+                                url: url,
+                                success: function(response) {
+                                    if (!response.success) {
+                                        return Swal.fire({
+                                            title: "Erro",
+                                            text: response.message,
+                                            icon: "error",
+                                        });
+                                    }
+                                    return window.location.reload();
+                                }
+                            });
                         }
-                    });
-                }
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 @endsection

@@ -27,7 +27,22 @@ class AdminProductRequest extends FormRequest
             'price' => 'required|numeric',
             'category_id' => 'required|integer',
             'quantity' => 'required|integer',
-            'main_image' => 'required|string',
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
+            'product_images' => 'required|array',
+            'product_images.*' => 'image|mimes:jpeg,png,jpg,svg,webp'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'O campo nome é obrigatório',
+            'description.required' => 'O campo descrição é obrigatório',
+            'price.required' => 'O campo preço é obrigatório',
+            'category_id.required' => 'O campo categoria é obrigatório',
+            'quantity.required' => 'O campo quantidade é obrigatório',
+            'main_image.required' => 'O campo imagem principal é obrigatório',
+            'product_images.required' => 'O campo imagens secundárias é obrigatório',
         ];
     }
 

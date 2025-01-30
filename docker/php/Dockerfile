@@ -5,6 +5,9 @@ COPY composer.lock composer.json /var/www/
 
 WORKDIR /var/www
 
+RUN echo "upload_max_filesize = 50M" > /usr/local/etc/php/conf.d/uploads.ini && \
+    echo "post_max_size = 55M" >> /usr/local/etc/php/conf.d/uploads.ini
+
 # Installs the necessary dependencies
 RUN apt-get update && apt-get install -y \
     libpng-dev \
