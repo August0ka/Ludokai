@@ -2,17 +2,19 @@
 
 namespace App\Modules\admin\Http\Controllers;
 
+use App\Modules\site\Http\Repositories\ProductImageRepository;
 use App\Modules\admin\Http\Repositories\CategoryRepository;
 use App\Modules\site\Http\Repositories\ProductRepository;
 use App\Modules\admin\Http\Requests\AdminProductRequest;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Product;
 use Throwable;
 
 class AdminProductController extends Controller
 {
     public function __construct(
+        protected ProductImageRepository $productImageRepository,
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
     ) {}
@@ -36,16 +38,19 @@ class AdminProductController extends Controller
         $inputs = $request->validated();
 
         $mainImage = $request->file('main_image');
-        dd($mainImage);
-        Storage::disk('public')->put('product_main_images', $mainImage);
+        $path = Storage::disk('public')->put('product_main_images', $mainImage);
+        $inputs['main_image'] = $path;
+
+        $product = $this->productRepository->create($inputs);
 
         $productImages = $request->file('product_images');
         foreach ($productImages as $productImage) {
-            Storage::disk('public')->put('product_secondary_images', $productImage);
+            $secondaryPath = Storage::disk('public')->put('product_secondary_images', $productImage);
+            $this->productImageRepository->create([
+                'product_id' => $product->id,
+                'image' => $secondaryPath,
+            ]);
         }
-
-        $this->productRepository->create($inputs);
-
         return redirect()->route('admin.products.index');
     }
 
