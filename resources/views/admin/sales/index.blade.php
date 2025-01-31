@@ -89,7 +89,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         let url =
-                            {{ !isset($product) ? null : route('admin.sales.destroy', $sale->id) }}
+                            "{{ !isset($sale) ? null : route('admin.sales.destroy', $sale->id) }}"
 
                         $.ajax({
                             headers: {

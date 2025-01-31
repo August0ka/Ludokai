@@ -5,7 +5,7 @@
     <h2 class="mb-4 text-gray-200 text-2xl font-semibold">Nossos Produtos</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         @foreach($products as $product)
-        <div class="flex flex-col items-center bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="flex flex-col items-center bg-pumpkin-100 shadow-lg rounded-lg overflow-hidden">
             <img src="{{ asset('storage/' . $product->main_image) }}"
                 alt="{{ $product->name }}"
                 class="w-full h-48 object-contain">

@@ -87,9 +87,9 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         let url =
-                            {{ !isset($product) ? null : route('admin.products.destroy', $product->id) }}
+                            "{{ !isset($product) ? null : route('admin.products.destroy', $product->id) }}"
 
-                        if (productId != null) {
+                        if (url) {
                             $.ajax({
                                 headers: {
                                     'X-CSRF-TOKEN': "{{ csrf_token() }}",
