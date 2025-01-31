@@ -13,7 +13,7 @@
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap items-center justify-center h-full">
         <div class="flex justify-center w-full lg:w-1/3">
-          <img class="h-40 md:h-48 lg:h-52 lg:mr-10 xl:mr-0" src="{{ asset('images/banner.svg') }}" alt="ludokai.png">
+          <img class="h-40 md:h-48 lg:h-52 lg:mr-10 2xl:mr-0" src="{{ asset('images/banner.svg') }}" alt="ludokai.png">
         </div>
         <div class="w-full md:w-96 lg:w-1/3 bg-vivid-violet-950 rounded-lg shadow-lg p-6">
           @if($errors->has('login_errors'))
