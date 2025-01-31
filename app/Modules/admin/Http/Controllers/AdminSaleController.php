@@ -6,11 +6,13 @@ use App\Modules\site\Http\Repositories\SaleRepository;
 use App\Modules\admin\Http\Requests\AdminSaleRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Modules\site\Http\Repositories\UserRepository;
 
 class AdminSaleController extends Controller
 {
     public function __construct(
-        protected SaleRepository $saleRepository
+        protected SaleRepository $saleRepository,
+        protected UserRepository $userRepository
     ) {}
 
     public function index()
@@ -22,7 +24,9 @@ class AdminSaleController extends Controller
 
     public function create()
     {
-        return view('admin.sales.form');
+        $users = $this->userRepository->pluck();
+
+        return view('admin.sales.form', compact('users'));
     }
 
     public function store(AdminSaleRequest $request)
@@ -36,7 +40,9 @@ class AdminSaleController extends Controller
 
     public function edit(Sale $sale)
     {
-        return view('admin.sales.form', compact('sale'));
+        $users = $this->userRepository->pluck();
+
+        return view('admin.sales.form', compact('sale', 'users'));
     }
 
     public function update(AdminSaleRequest $request, sale $sale)

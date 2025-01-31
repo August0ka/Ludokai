@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+                @forelse ($categories as $category)
                 <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
                     <td class="px-4 py-2 text-left">{{ $category->id }}</td>
                     <td class="px-4 py-2 text-left">{{ $category->name }}</td>
@@ -57,7 +57,11 @@
                         </button>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                    <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
+                        <td colspan="6" class="text-center py-2">Nenhum registro encontrado</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
@@ -76,14 +80,17 @@
                 denyButtonText: "Não"
             }).then((result) => {
                 if (result.isConfirmed) {
+                    let url =
+                    {{ !isset($product) ? null : route('admin.categories.destroy', $category->id) }}
+
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': "{{ csrf_token() }}",
                         },
                         type: "delete",
-                        url: "{{ route('admin.categories.destroy', $category->id) }}",
+                        url: url,
                         success: function(response) {
-                            if (!response.success) {
+                            if (!response.success) {    
                                 return Swal.fire({
                                     title: "Erro",
                                     text: response.message,

@@ -27,4 +27,11 @@ class UserRepository extends BaseRepository
             ->orderBy('id', 'desc')
             ->get();
     }
+
+    public function pluck()
+    {
+        return $this->model
+            ->newQuery()
+            ->pluck('name', 'id');
+    }
 }

@@ -20,7 +20,7 @@
                     <ul class="space-y-3">
                         <li class="">
                             <div
-                                class="flex items-center border-l {{ Route::is('admin.users.index') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
+                                class="flex items-center border-l {{ Route::is('admin.users.*') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="ml-1.5 size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,14 +29,14 @@
 
                                 <a href="{{ route('admin.users.index') }}"
                                     class="flex items-center space-x-2 hover:text-gray-100 ml-2 
-                                    {{ Route::is('admin.users.index') ? 'text-gray-100' : 'text-gray-400' }}">
+                                    {{ Route::is('admin.users.*') ? 'text-gray-100' : 'text-gray-400' }}">
                                     <span>Usuários</span>
                                 </a>
                             </div>
                         </li>
                         <li>
                             <div
-                                class="flex items-center border-l {{ Route::is('admin.products.index') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
+                                class="flex items-center border-l {{ Route::is('admin.products.*') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="ml-1.5 size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -45,14 +45,14 @@
 
                                 <a href="{{ route('admin.products.index') }}"
                                     class="flex items-center space-x-2 hover:text-gray-100 ml-2 
-                                    {{ Route::is('admin.products.index') ? 'text-gray-100' : 'text-gray-400' }}">
+                                    {{ Route::is('admin.products.*') ? 'text-gray-100' : 'text-gray-400' }}">
                                     <span>Produtos</span>
                                 </a>
                             </div>
                         </li>
                         <li>
                             <div
-                                class="flex items-center border-l {{ Route::is('admin.categories.index') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
+                                class="flex items-center border-l {{ Route::is('admin.categories.*') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="ml-1.5 size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -61,14 +61,14 @@
 
                                 <a href="{{ route('admin.categories.index') }}"
                                     class="flex items-center space-x-2 hover:text-gray-100 ml-2
-                                    {{ Route::is('admin.categories.index') ? 'text-gray-100' : 'text-gray-400' }}">
+                                    {{ Route::is('admin.categories.*') ? 'text-gray-100' : 'text-gray-400' }}">
                                     <span>Categorias</span>
                                 </a>
                             </div>
                         </li>
                         <li>
                             <div
-                                class="flex items-center border-l {{ Route::is('admin.sales.index') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
+                                class="flex items-center border-l {{ Route::is('admin.sales.*') ? 'border-gray-200' : 'border-gray-400' }} hover:border-gray-200 text-pumpkin-500 hover:text-pumpkin-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="ml-1.5 size-5">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +77,7 @@
 
                                 <a href="{{ route('admin.sales.index') }}"
                                     class="flex items-center space-x-2 hover:text-gray-100 ml-2
-                                    {{ Route::is('admin.sales.index') ? 'text-gray-100' : 'text-gray-400' }}">
+                                    {{ Route::is('admin.sales.*') ? 'text-gray-100' : 'text-gray-400' }}">
                                     <span>Vendas</span>
                                 </a>
                             </div>
