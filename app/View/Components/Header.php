@@ -11,10 +11,9 @@ class Header extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        public $categories
+    ) {}
 
     /**
      * Get the view / contents that represent the component.

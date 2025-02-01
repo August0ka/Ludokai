@@ -20,4 +20,12 @@ class ProductImageRepository extends BaseRepository
             ->where('product_id', $productId)
             ->pluck('image');
     }
+
+    public function deleteImageByProduct($productId)
+    {
+        return $this->model
+            ->newQuery()
+            ->where('product_id', $productId)
+            ->delete();
+    }
 }

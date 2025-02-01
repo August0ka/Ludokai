@@ -64,6 +64,31 @@ class AdminProductController extends Controller
     public function update(AdminProductRequest $request, product $product)
     {
         $inputs = $request->validated();
+        if ($request->hasFile('main_image')) {
+            Storage::disk('public')->delete($product->main_image);
+            $mainImage = $request->file('main_image');
+            $path = Storage::disk('public')->put('product_main_images', $mainImage);
+            $inputs['main_image'] = $path;
+        }
+
+        if ($request->hasFile('product_images')) {
+            $oldImages = $this->productImageRepository->fetchImageByProduct($product->id);
+
+            foreach ($oldImages as $oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
+
+            $this->productImageRepository->deleteImageByProduct($product->id);
+
+            $productImages = $request->file('product_images');
+            foreach ($productImages as $productImage) {
+                $secondaryPath = Storage::disk('public')->put('product_secondary_images', $productImage);
+                $this->productImageRepository->create([
+                    'product_id' => $product->id,
+                    'image' => $secondaryPath,
+                ]);
+            }
+        }
 
         $this->productRepository->update($inputs, $product->id);
 

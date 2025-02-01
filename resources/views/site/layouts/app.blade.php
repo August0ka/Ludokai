@@ -10,9 +10,7 @@
 </head>
 
 <body>
-
-    <x-header />
-    {{-- <x-header :categories="$categories" /> --}}
+        <x-header :categories="$categories" />
     @yield('site_content')
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
