@@ -5,6 +5,7 @@ namespace App\Modules\site\Http\Controllers;
 use App\Modules\site\Http\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -39,7 +40,14 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('site.register.index');
+        $statesArray = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')->json();
+
+        $states = [];
+        foreach ($statesArray as $state) {
+            $states[$state['id']] = $state['nome'];
+        }
+
+        return view('site.register.index', compact('states'));
     }
 
     public function store(Request $request)

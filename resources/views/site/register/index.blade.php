@@ -11,7 +11,7 @@
 <body class="h-screen">
     <div class="w-100 flex items-center justify-center px-4 h-full lg:h-full">
         <div>
-            <div class="bg-pumpkin-500 text-gray-100 text-center py-2 md:py-4 rounded-t-lg">
+            <div class="bg-pumpkin-500 text-gray-100 text-center py-2 md:py-3 rounded-t-lg">
                 <h4 class="text-lg md:text-xl font-bold">Cadastro</h4>
             </div>
             <div class="p-4 bg-vivid-violet-950 rounded-b-lg text-xs md:text-base">
@@ -21,48 +21,54 @@
                         <div class="col-span-12 md:col-span-8">
                             <label for="name" class="block text-pumpkin-300 font-medium mb-1">Nome</label>
                             <input id="name" type="text"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
                                 name="name" required autofocus>
                         </div>
                         <div class="col-span-5 md:col-span-4">
                             <label for="cpf" class="block text-pumpkin-300 font-medium mb-1">CPF</label>
                             <input id="cpf" type="text"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
                                 name="cpf" required>
                         </div>
                         <div class="col-span-7 md:col-span-7">
                             <label for="email" class="block text-pumpkin-300 font-medium mb-1">Email</label>
                             <input id="email" type="email"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
                                 name="email" required>
                         </div>
                         <div class="col-span-4 md:col-span-5">
                             <label for="password" class="block text-pumpkin-300 font-medium mb-1">Senha</label>
                             <input id="password" type="password"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
                                 name="password" required>
                         </div>
                         <div class="col-span-8 md:col-span-12">
                             <label for="address" class="block text-pumpkin-300 font-medium mb-1">Endereço</label>
                             <input id="address" type="text"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
                                 name="address" required>
                         </div>
                         <div class="col-span-6">
                             <label for="city" class="block text-pumpkin-300 font-medium mb-1">Cidade</label>
                             <input id="city" type="text"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
+                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
                                 name="city" required>
                         </div>
                         <div class="col-span-6">
                             <label for="state" class="block text-pumpkin-300 font-medium mb-1">Estado</label>
-                            <input id="state" type="text"
-                                class="w-full border border-gray-300 rounded-lg px-2 py-2 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
-                                name="state" placeholder="Mato Grosso" required>
+                            <select name="state" id="state"
+                                class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
+                                <option value="">Selecione...</option>
+                                @foreach ($states as $index => $state)
+                                <option value="{{ $index }}">
+                                    {{ $state }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-span-12 text-center">
                             <button type="submit"
-                                class="bg-pumpkin-500 hover:bg-pumpkin-700 text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-pumpkin-500">Registrar</button>
+                                class="bg-pumpkin-500 hover:bg-pumpkin-700 text-white px-6 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-pumpkin-500">Registrar</button>
                         </div>
                     </div>
 
