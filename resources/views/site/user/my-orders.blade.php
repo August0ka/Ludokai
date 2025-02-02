@@ -2,7 +2,7 @@
 
 @section('site_content')
     <h2 class="text-gray-100 text-2xl mx-5">Meus pedidos</h2>
-    @foreach ($sales as $sale)
+    @forelse ($sales as $sale)
         <div class="grid grid-cols-12 justify-center mt-5 px-10">
             <div class="col-span-6 bg-vivid-violet-950 rounded-b-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-200 rounded-t-lg overflow-hidden">
@@ -28,5 +28,16 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @empty
+    <div class="flex flex-col items-center justify-center mt-5">
+        <div class="flex justify-center">
+            <img src="{{ asset('images/ludokai_cat.png') }}" alt="ludokai_cat" class="w-80 h-80">
+        </div>
+        <div class="text-gray-100 text-center ml-8 lg:mx-auto text-lg lg:text-xl mt-4">
+            <p class="mb-2">Ei, sou o Ludo, o gatinho cósmico!</p>
+            <p class="mb-2">Tá esperando o quê?</p>
+            <p>O universo tá aqui te desafiando a fazer sua primeira compra e brilhar mais que as estrelas!</p>
+        </div>
+    </div>    
+    @endforelse
 @endsection
