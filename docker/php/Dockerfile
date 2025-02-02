@@ -40,4 +40,6 @@ RUN chown -R www-data:www-data /var/www
 # change current user to www
 USER www
 
+EXPOSE 8080
+
 CMD ["php-fpm"]

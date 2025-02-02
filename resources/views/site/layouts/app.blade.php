@@ -10,7 +10,7 @@
 </head>
 
 <body>
-        <x-header :categories="$categories" />
+    <x-header :categories="$categories" />
     @yield('site_content')
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -18,14 +18,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#sidebar_button').on('click', function() {
-                $('#sidebarMenu').toggleClass('-translate-x-full');
-                $('#sidebarOverlay').toggleClass('hidden');
+            $('#dropdown-container').on('mouseover', function() {
+                $('#dropdown-menu').removeClass('hidden').addClass('block');
             });
 
-            $('#sidebarOverlay').on('click', function() {
-                $('#sidebarMenu').addClass('-translate-x-full');
-                $(this).addClass('hidden');
+            $('#dropdown-container').on('mouseleave', function() {
+                $('#dropdown-menu').removeClass('block').addClass('hidden');
             });
         });
     </script>

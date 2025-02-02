@@ -27,7 +27,7 @@
             <div
                 class="col-span-12 flex flex-col justify-center bg-pumpkin-100 mx-3 rounded-lg p-6 mb-6
                     lg:col-span-4 lg:col-start-3
-                    2xl:col-span-2 2xl:mb-0">
+                    2xl:col-span-3 2xl:col-start-4 2xl:mb-0 2xl:row-start-2">
                 <h2 class="text-2xl font-semibold mb-4">{{ $product->name }}</h2>
                 <p class="text-gray-700 mb-4">{{ $product->description }}</p>
                 <h3 class="text-xl font-bold text-green-600">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</h3>
