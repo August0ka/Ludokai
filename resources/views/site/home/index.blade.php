@@ -13,9 +13,10 @@
             <div class="p-4 flex flex-col items-center">
                 <h5 class="text-lg font-semibold text-gray-800">{{ $product->name }}</h5>
                 <p class="text-gray-600 text-sm">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</p>
-                <a href="{{ route('site.show.product', $product->id) }}"
-                    class="mt-4 px-4 py-2 bg-green-500 text-gray-100 text-sm font-medium rounded-md hover:bg-green-600">
-                    Comprar
+                <a href="{{ $product->quantity != 0 ? route('site.show.product', $product->id) : '' }}"
+                    class="mt-4 px-4 py-2 text-gray-100 text-sm font-medium rounded-full
+                        {{ $product->quantity != 0 ? 'bg-green-500 hover:bg-green-600' : 'bg-amber-500 hover:bg-amber-600 pointer-events-none' }}">
+                    {{ $product->quantity != 0 ? 'Comprar' : 'Indisponível' }}
                 </a>
             </div>
         </div>

@@ -30,4 +30,9 @@ class ProductRepository extends BaseRepository
 
         return $product->get();
     }
+
+    public function fetchProductById($id)
+    {
+        return $this->model->find($id);
+    }
 }
