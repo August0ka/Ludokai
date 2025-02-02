@@ -37,9 +37,9 @@
                     </div>
                 </a>
                 <div class="col-span-12 h-10 bg-vivid-violet-950 flex items-center justify-between">
-                    <div class="ml-5">
+                    <div class="flex ml-5">
                         <button type="button" id="sidebar_button"
-                            class="items-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+                            class="items-center text-sm text-gray-500 rounded-lg mr-10 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -47,11 +47,27 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
+
+                        <form class="flex w-80">
+                            <input type="search"
+                                id="search"
+                                class="block w-full py-1 px-2 text-sm text-gray-900 border border-pumpkin-300 rounded-l-lg bg-pumpkin-200 focus:outline-none focus:ring-pumpkin-300 focus:border-pumpkin-500"
+                                placeholder="Pesquisar..."
+                                required />
+                            <button type="submit"
+                                class="text-vivid-violet-950 bg-pumpkin-600 hover:bg-pumpkin-500 focus:ring-4 focus:outline-none focus:ring-pumpkin-300 font-medium rounded-r-lg text-sm px-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+
+                            </button>
+                        </form>
+
                     </div>
                     <div>
                         @auth
                         <span class="text-gray-100 font-medium text-xs md:text-lg xl:text-base px-2">
-                            Olá, {{ substr(Auth::user()->name, 0, strpos(Auth::user()->name, ' ')) }}
+                            Olá, {{ Str::before(Auth::user()->name, ' ') }}
                         </span>
                         <a href="{{ route('site.mySales') }}"
                             class="text-gray-100 mr-1 bg-pumpkin-400 hover:bg-pumpkin-500 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
