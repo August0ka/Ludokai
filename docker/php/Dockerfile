@@ -26,6 +26,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+apt-get install -y nodejs
+
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -43,6 +46,7 @@ COPY docker/nginx/conf.d /etc/nginx/conf.d/default.conf
 RUN echo '#!/bin/bash\n\
 composer install --no-dev --optimize-autoloader --no-interaction\n\
 npm install && npm run build\n\
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
 php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
