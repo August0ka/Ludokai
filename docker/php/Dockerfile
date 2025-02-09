@@ -45,6 +45,8 @@ composer install --no-dev --optimize-autoloader --no-interaction\n\
 php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
+php artisan migrate\n\
+php artisan db:seed\n\
 php-fpm -D\n\
 sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf\n\
 nginx -g "daemon off;"' > /start.sh \
