@@ -50,6 +50,7 @@ chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
 php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
+php artisan storage:link\n\
 php artisan migrate\n\
 php artisan db:seed\n\
 php-fpm -D\n\
