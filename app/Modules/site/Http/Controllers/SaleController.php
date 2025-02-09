@@ -52,4 +52,9 @@ class SaleController extends Controller
 
     return view('site.user.my-orders', compact('sales'));
   }
+
+  public function finishSale()
+  {
+    return view('site.product.confirmPurchase');
+  }
 }

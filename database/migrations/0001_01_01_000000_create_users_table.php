@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('cpf');
+            $table->string('phone');
+            $table->string('cep');
             $table->string('address');
             $table->string('city');
             $table->string('state');

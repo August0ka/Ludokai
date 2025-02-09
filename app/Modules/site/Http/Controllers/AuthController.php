@@ -3,6 +3,7 @@
 namespace App\Modules\site\Http\Controllers;
 
 use App\Modules\site\Http\Repositories\UserRepository;
+use App\Modules\site\Http\Requests\SiteUserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -50,9 +51,11 @@ class AuthController extends Controller
         return view('site.register.index', compact('states'));
     }
 
-    public function store(Request $request)
+    public function store(SiteUserRequest $request)
     {
-        $this->userRepository->create(request()->all());
+        $inputs = $request->validated();
+
+        $this->userRepository->create($inputs);
 
         return redirect()->route('site.login');
     }

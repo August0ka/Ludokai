@@ -63,7 +63,7 @@
                 <p>{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</p>
             </div>
             </p>
-            <form action="{{ route('sales.store') }}" method="POST" class="mt-6">
+            <form action="{{ route('site.pagbank.redirect') }}" method="POST" class="mt-6">
                 @csrf
                 <input type="hidden" id="hiddenQuantity" name="quantity" value="1">
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
