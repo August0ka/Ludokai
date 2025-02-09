@@ -1,5 +1,3 @@
-daemon off;
-
 server {
     listen 8080;
     client_max_body_size 50M;
