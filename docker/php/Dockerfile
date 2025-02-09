@@ -38,7 +38,6 @@ COPY --chown=www:www . /var/www/
 
 # Configure Nginx
 COPY docker/nginx/conf.d /etc/nginx/conf.d/default.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Create start script
 RUN echo '#!/bin/bash\n\
@@ -47,7 +46,7 @@ php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
 php-fpm -D\n\
-nginx -g "daemon off;"' > /start.sh \
+nginx' > /start.sh \
     && chmod +x /start.sh
 
 # Set permissions
