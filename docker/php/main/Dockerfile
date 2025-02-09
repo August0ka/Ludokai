@@ -51,8 +51,8 @@ php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
 php artisan storage:link\n\
-php artisan migrate\n\
-php artisan db:seed\n\
+php artisan migrate --force\n\
+php artisan db:seed --force\n\
 php-fpm -D\n\
 sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf\n\
 nginx -g "daemon off;"' > /start.sh \
