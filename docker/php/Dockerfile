@@ -1,4 +1,3 @@
-# Defining php version
 FROM php:8.3-fpm
 
 COPY composer.lock composer.json /var/www/
@@ -20,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
+    nginx \
     libpq-dev \
     && docker-php-ext-install pdo_pgsql \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -37,9 +37,17 @@ RUN groupadd -g 1000 www \
 COPY --chown=www:www . /var/www/
 RUN chown -R www-data:www-data /var/www
 
-# change current user to www
-USER www
+# Configure Nginx
+COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+# Create start script
+RUN echo '#!/bin/bash\n\
+php-fpm -D\n\
+nginx -g "daemon off;"' > /start.sh \
+    && chmod +x /start.sh
 
 EXPOSE 8080
+ENV PORT=8080
 
-CMD ["php-fpm"]
+CMD ["/start.sh"]
