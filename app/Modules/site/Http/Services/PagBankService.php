@@ -14,6 +14,7 @@ class PagBankService
     $redirectUrl = "https://{$sandbox}api.pagseguro.com/checkouts";
     $body = $this->mountBody();
 
+
     $data = Http::withHeaders([
       'Authorization' => "Bearer $token",
       'Content-type' => 'application/json',
@@ -21,7 +22,11 @@ class PagBankService
     ])
       ->post($redirectUrl, $body);
 
-    return $data->json();
+    if ($data->successful()) {
+      return $data->json();
+    } else {
+      dd('Erro:' . $data->body(), 'Status: ' . $data->status());
+    }
   }
 
   private function mountBody()
