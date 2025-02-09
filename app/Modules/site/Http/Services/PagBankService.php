@@ -65,7 +65,7 @@ class PagBankService
         ["type" => "DEBIT_CARD"],
         ["type" => "PIX"]
       ],
-      "redirect_url" => route('site.finish.sal e'),
+      "redirect_url" => route('site.finish.sale'),
       "soft_descriptor" => "teste"
     ];
 
