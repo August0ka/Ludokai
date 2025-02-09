@@ -4,7 +4,7 @@ services:
         container_name: api
         build:
             context: .
-            dockerfile: ./docker/php/main/Dockerfile
+            dockerfile: ./docker/php/develop/Dockerfile
         restart: always
         working_dir: /var/www
         volumes:
@@ -41,7 +41,7 @@ services:
             - "80:80"
         volumes:
             - ./:/var/www
-            - ./docker/main/nginx/conf.d/:/etc/nginx/conf.d/default.conf
+            - ./docker/nginx/develop/conf.d/:/etc/nginx/conf.d/default.conf
         networks:
             - app-network
 
