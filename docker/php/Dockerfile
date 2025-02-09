@@ -35,17 +35,24 @@ RUN groupadd -g 1000 www \
 
 # copy applications folder and set permissions
 COPY --chown=www:www . /var/www/
-RUN chown -R www-data:www-data /var/www
 
 # Configure Nginx
-COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx/conf.d /etc/nginx/conf.d/default.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Create start script
 RUN echo '#!/bin/bash\n\
+composer install --no-dev --optimize-autoloader --no-interaction\n\
+php artisan config:cache\n\
+php artisan route:cache\n\
+php artisan view:cache\n\
 php-fpm -D\n\
 nginx -g "daemon off;"' > /start.sh \
     && chmod +x /start.sh
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www && \
+    chmod -R 755 /var/www/storage
 
 EXPOSE 8080
 ENV PORT=8080
