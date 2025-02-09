@@ -42,6 +42,7 @@ COPY docker/nginx/conf.d /etc/nginx/conf.d/default.conf
 # Create start script
 RUN echo '#!/bin/bash\n\
 composer install --no-dev --optimize-autoloader --no-interaction\n\
+npm install && npm run build\n\
 php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
