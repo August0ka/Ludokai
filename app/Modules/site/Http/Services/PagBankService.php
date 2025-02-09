@@ -3,6 +3,7 @@
 namespace App\Modules\site\Http\Services;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class PagBankService
 {
@@ -52,7 +53,7 @@ class PagBankService
         [
           "reference_id" => (string)$this->product->id,
           "name" => $this->product->name,
-          "description" => $this->product->description,
+          "description" => Str::length($this->product->description) > 251 ? Str::limit($this->product->description, 252) . '...' : $this->product->description,
           "quantity" => $this->product->quantity,
           "unit_amount" => $productPrice,
           // "image_url" => asset('storage/' . $this->product->main_image)
