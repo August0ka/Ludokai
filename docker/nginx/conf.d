@@ -1,7 +1,5 @@
 server {
     listen 80;
-    listen [::]:80;
-    server_name _;
     client_max_body_size 50M;
 
     index index.php index.html;
@@ -12,7 +10,7 @@ server {
     location ~ \.php$ {
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_pass api:9000;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
