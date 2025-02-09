@@ -46,10 +46,7 @@ COPY docker/nginx/main/conf.d /etc/nginx/conf.d/default.conf
 RUN echo '#!/bin/bash\n\
 composer install --no-dev --optimize-autoloader --no-interaction\n\
 npm install && npm run build\n\
-chmod -R 775 /var/www/storage\n\
-chmod -R 775 /var/www/public/storage\n\
-chown -R www:www /var/www/storage\n\
-chown -R www:www /var/www/public/storage\n\
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
 php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
@@ -60,13 +57,10 @@ php-fpm -D\n\
 sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf\n\
 nginx -g "daemon off;"' > /start.sh \
     && chmod +x /start.sh
+
 # Set permissions
-RUN chown -R www:www /var/www && \
-    chmod -R 775 /var/www && \
-    chmod -R 775 /var/www/storage && \
-    chmod -R 775 /var/www/public/storage && \
-    chown -R www:www /var/www/storage && \
-    chown -R www:www /var/www/public/storage
+RUN chown -R www-data:www-data /var/www && \
+    chmod -R 755 /var/www/storage
 
 EXPOSE 8080
 ENV PORT=8080
