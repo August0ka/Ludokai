@@ -40,7 +40,7 @@ RUN groupadd -g 1000 www \
 COPY --chown=www:www . /var/www/
 
 # Configure Nginx
-COPY docker/nginx/conf.d /etc/nginx/conf.d/default.conf
+COPY docker/nginx/main/conf.d /etc/nginx/conf.d/default.conf
 
 # Create start script
 RUN echo '#!/bin/bash\n\
