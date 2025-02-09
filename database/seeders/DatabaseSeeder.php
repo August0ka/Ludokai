@@ -48,26 +48,26 @@ class DatabaseSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'User 1', 
-                'email' => 'user1@example.com', 
-                'cpf' => '111.111.111-11', 
+                'name' => 'Augusto Ferreira', 
+                'email' => 'augusto@user.com', 
+                'cpf' => '76736625076', 
                 'address' => 'Address 1', 
                 'city' => 'City A', 
                 'state' => '11', 
                 'cep' => '11111111', 
-                'phone' => '911111111', 
+                'phone' => '5566999080622', 
                 'password' => '123456'
             ],
             [
                 'name' => 'User 2', 
                 'email' => 'user2@example.com', 
-                'cpf' => '222.222.222-22', 
+                'cpf' => '90639164005', 
                 'address' => 'Address 2', 
                 'city' => 'City B', 
                 'state' => '12', 
                 'cep' => '22222222', 
-                'phone' => '922222222', 
-                'password' => 'password2'
+                'phone' => '5566999458722', 
+                'password' => '123456'
             ],
         ];
         
