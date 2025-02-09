@@ -1,5 +1,7 @@
 server {
-    listen 8080;
+    listen 80;
+    listen [::]:80;
+    server_name _;
     client_max_body_size 50M;
 
     index index.php index.html;

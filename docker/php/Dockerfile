@@ -46,7 +46,8 @@ php artisan config:cache\n\
 php artisan route:cache\n\
 php artisan view:cache\n\
 php-fpm -D\n\
-nginx' > /start.sh \
+sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf\n\
+nginx -g "daemon off;"' > /start.sh \
     && chmod +x /start.sh
 
 # Set permissions
