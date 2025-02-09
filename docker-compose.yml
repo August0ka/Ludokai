@@ -41,7 +41,7 @@ services:
             - "80:80"
         volumes:
             - ./:/var/www
-            - ./docker/main/nginx/conf.d/:/etc/nginx/conf.d/default.conf
+            - ./docker/nginx/main/conf.d/:/etc/nginx/conf.d/default.conf
         networks:
             - app-network
 
