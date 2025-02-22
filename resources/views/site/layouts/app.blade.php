@@ -29,8 +29,16 @@
 
             $('#search-mobile-button').on('click', function() {
                 $('#mobile-search-form').removeClass('hidden').addClass('block');
-                $('#mobile-search-header').removeClass('hidden').addClass('block');
+                $('#mobile-search-header').removeClass('hidden').addClass('flex');
                 $('#web-header').removeClass('block').addClass('hidden');
+                $('#search-overlay').removeClass('hidden');
+            });
+
+            $('#search-overlay').on('click', function() {
+                $('#mobile-search-form').removeClass('block').addClass('hidden');
+                $('#mobile-search-header').removeClass('flex').addClass('hidden');
+                $('#web-header').removeClass('hidden').addClass('block');
+                $('#search-overlay').addClass('hidden');
             });
         });
     </script>
