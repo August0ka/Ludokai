@@ -1,11 +1,9 @@
 FROM php:8.3-fpm
 
-# Copia os arquivos de dependência
 COPY composer.lock composer.json /var/www/
 
 WORKDIR /var/www
 
-# Configura o PHP para uploads maiores
 RUN echo "upload_max_filesize = 50M" > /usr/local/etc/php/conf.d/uploads.ini && \
     echo "post_max_size = 55M" >> /usr/local/etc/php/conf.d/uploads.ini
 
@@ -28,16 +26,15 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Instala o NodeJS
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # Instala o Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Cria usuário e grupo para a aplicação
-RUN groupadd -g 1000 www \
-    && useradd -u 1000 -ms /bin/bash -g www www
+# Cria usuário para a aplicação
+RUN groupadd -g 1000 www && \
+    useradd -u 1000 -ms /bin/bash -g www www
 
 # Copia os arquivos da aplicação e ajusta a propriedade
 COPY --chown=www:www . /var/www/
@@ -45,25 +42,28 @@ COPY --chown=www:www . /var/www/
 # Configura o Nginx
 COPY docker/nginx/main/conf.d /etc/nginx/conf.d/default.conf
 
-# Cria o script de start e o torna executável
-RUN echo '#!/bin/bash
-composer install --no-dev --optimize-autoloader --no-interaction
-npm install && npm run build
-chmod -R 775 /var/www/storage /var/www/bootstrap/cache
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan storage:link
-# Remover o link criado automaticamente e recriar para apontar para /var/data
-rm -rf public/storage
-ln -sfn /var/data public/storage
-php artisan migrate --force
-php artisan db:seed --force
-php-fpm -D
-sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf
-nginx -g "daemon off;"' > /start.sh && chmod +x /start.sh
+# Cria o script de start
+RUN echo '#!/bin/bash\n\
+composer install --no-dev --optimize-autoloader --no-interaction\n\
+npm install && npm run build\n\
+chmod -R 775 /var/www/storage /var/www/bootstrap/cache\n\
+php artisan config:cache\n\
+php artisan route:cache\n\
+php artisan view:cache\n\
+php artisan storage:link\n\
+# Remove o link criado automaticamente e recria para apontar para /var/data\n\
+rm -rf public/storage\n\
+ln -sfn /var/data public/storage\n\
+php artisan migrate --force\n\
+php artisan db:seed --force\n\
+php-fpm -D\n\
+sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf\n\
+nginx -g "daemon off;"' > /start.sh
 
-# Cria os diretórios e ajusta permissões
+# Torna o script executável
+RUN chmod +x /start.sh
+
+# Garante que os diretórios existam e ajusta as permissões
 RUN mkdir -p /var/www/storage /var/data && \
     chown -R www-data:www-data /var/www && \
     chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
