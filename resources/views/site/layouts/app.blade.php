@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ludokai</title>
     @vite('resources/css/app.css')
+    @yield('site_styles')
 </head>
 
 <body>
