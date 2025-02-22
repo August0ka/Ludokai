@@ -60,7 +60,9 @@ nginx -g "daemon off;"' > /start.sh \
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www && \
-    chmod -R 755 /var/www/storage
+    chmod -R 755 /var/www/storage && \
+    chown -R www-data:www-data /var/data && \
+    chmod -R 775 /var/data
 
 EXPOSE 8080
 ENV PORT=8080
