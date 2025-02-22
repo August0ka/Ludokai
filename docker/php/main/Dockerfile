@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-apt-get install -y nodejs
+    apt-get install -y nodejs
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -58,9 +58,10 @@ sed -i "s/80/$PORT/g" /etc/nginx/conf.d/default.conf\n\
 nginx -g "daemon off;"' > /start.sh \
     && chmod +x /start.sh
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www && \
-    chmod -R 755 /var/www/storage && \
+# Set permissions and ensure directories exist
+RUN mkdir -p /var/www/storage /var/data && \
+    chown -R www-data:www-data /var/www && \
+    chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
     chown -R www-data:www-data /var/data && \
     chmod -R 775 /var/data
 
