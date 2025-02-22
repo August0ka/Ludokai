@@ -11,7 +11,7 @@
 
                     <hr class="w-full border-t border-gray-200">
                     <div class="p-4 flex flex-col items-center">
-                        <h5 class="text-lg font-semibold text-gray-800">{{ $product->name }}</h5>
+                        <h5 class="text-sm sm:text-lg font-semibold text-gray-800">{{ $product->name }}</h5>
                         <p class="text-gray-600 text-sm">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</p>
                         <a href="{{ $product->quantity != 0 ? route('site.show.product', $product->id) : '' }}"
                             class="mt-4 px-4 py-2 text-gray-100 text-sm font-medium rounded-full
