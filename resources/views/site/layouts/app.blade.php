@@ -26,6 +26,12 @@
             $('#dropdown-container').on('mouseleave', function() {
                 $('#dropdown-menu').removeClass('block').addClass('hidden');
             });
+
+            $('#search-mobile-button').on('click', function() {
+                $('#mobile-search-form').removeClass('hidden').addClass('block');
+                $('#mobile-search-header').removeClass('hidden').addClass('block');
+                $('#web-header').removeClass('block').addClass('hidden');
+            });
         });
     </script>
 

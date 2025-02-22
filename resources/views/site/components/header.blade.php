@@ -6,7 +6,7 @@
                         <img src="{{ asset('images/banner.svg') }}" class="w-28 lg:w-32" alt="Ludokai_banner" />
                     </div>
                 </a>
-                <div class="col-span-12 h-10 bg-vivid-violet-950 flex items-center justify-between">
+                <div class="col-span-12 h-10 bg-vivid-violet-950 flex items-center justify-between" id="web-header">
                     <div class="flex ml-3 lg:ml-5">
                         <div class="relative mr-2" id="dropdown-container">
                             <button
@@ -29,7 +29,8 @@
                                     </li>
                                     @foreach ($categories as $category)
                                         <li>
-                                            <a href="{{ route('site.home', ['category' => $category->id]) }}" class="block px-4 py-2 hover:bg-pumpkin-700">
+                                            <a href="{{ route('site.home', ['category' => $category->id]) }}"
+                                                class="block px-4 py-2 hover:bg-pumpkin-700">
                                                 {{ $category->name }}
                                             </a>
                                         </li>
@@ -38,8 +39,11 @@
                             </div>
                         </div>
 
-                        <form class="flex w-52 lg:w-80 2xl:lg:w-80" method="GET" action="{{ route('site.home') }}">
-                            <input type="search" id="search" name="search" value="{{ request()->search ? request()->search : '' }}"
+                        <!-- Search Web -->
+                        <form class="hidden md:flex w-52 lg:w-80 2xl:lg:w-80" method="GET"
+                            action="{{ route('site.home') }}">
+                            <input type="search" id="search" name="search"
+                                value="{{ request()->search ? request()->search : '' }}"
                                 class="block w-full py-1 px-2 text-sm text-gray-900 border border-pumpkin-300 rounded-l-lg bg-pumpkin-200 focus:outline-none focus:ring-pumpkin-300 focus:border-pumpkin-500"
                                 placeholder="Pesquisar..." />
                             <button type="submit"
@@ -53,6 +57,15 @@
                             </button>
                         </form>
 
+                        <!-- Search Mobile -->
+                        <button type="button" id="search-mobile-button"
+                            class="text-gray-100 bg-pumpkin-600 hover:bg-pumpkin-500 focus:ring-4 focus:outline-none focus:ring-pumpkin-300 font-medium rounded-full text-sm px-2.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </button>
                     </div>
                     <div>
                         @auth
@@ -91,6 +104,26 @@
                             </a>
                         @endauth
                     </div>
+                </div>
+
+                <div class="hidden col-span-12 bg-vivid-violet-950 items-center justify-between"
+                    id="mobile-search-header">
+                    <form class="bg-pumpkin-600 h-10 flex items-center w-full lg:w-80 2xl:lg:w-80" method="GET"
+                        action="{{ route('site.home') }}" id="mobile-search-form">
+                        <button type="submit"
+                            class="text-vivid-violet-950 focus:ring-4 focus:outline-none font-medium rounded-r-lg text-sm px-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+
+                        </button>
+                        <input type="search" id="search" name="search"
+                            value="{{ request()->search ? request()->search : '' }}"
+                            class="block w-full h-10 py-1 px-2 text-sm text-gray-900 border bg-pumpkin-200 border-pumpkin-300 rounded-l-lgbg-pumpkin-200 focus:outline-none focus:ring-pumpkin-300 focus:border-pumpkin-500"
+                            placeholder="Pesquisar..." />
+                    </form>
                 </div>
             </div>
         </nav>
