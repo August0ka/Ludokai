@@ -30,12 +30,12 @@
                                     </a>
                                 </li>
                                 @foreach ($categories as $category)
-                                <li>
-                                    <a href="{{ route('site.home', ['category' => $category->id]) }}"
-                                        class="block px-4 py-2 hover:bg-pumpkin-700">
-                                        {{ $category->name }}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ route('site.home', ['category' => $category->id]) }}"
+                                            class="block px-4 py-2 hover:bg-pumpkin-700">
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -62,8 +62,8 @@
                     <!-- Search Mobile -->
                     <button type="button" id="search-mobile-button"
                         class="block md:hidden text-gray-100 bg-pumpkin-600 hover:bg-pumpkin-500 focus:ring-4 focus:outline-none focus:ring-pumpkin-300 font-medium rounded-full text-sm px-2.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
@@ -71,44 +71,52 @@
                 </div>
                 <div>
                     @auth
-                    <div class="flex items-center">
-                        <span class="text-gray-100 font-medium text-xs md:text-lg xl:text-base px-2">
-                            Olá, {{ Str::before(Auth::user()->name, ' ') }}
-                        </span>
+                        <div class="flex items-center">
+                            <span class="text-gray-100 font-medium text-xs md:text-lg lg:text-base xl:text-base px-2">
+                                Olá, {{ Str::before(Auth::user()->name, ' ') }}
+                            </span>
 
-                        <a href="{{ route('site.mySales') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-5 block lg:hidden 2xl:hidden mr-2 text-pumpkin-600 hover:text-pumpkin-500">
-                                <path fill-rule="evenodd"
-                                    d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                            <a href="{{ route('site.mySales') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="size-5 block lg:hidden 2xl:hidden mr-2 text-pumpkin-600 hover:text-pumpkin-500">
+                                    <path fill-rule="evenodd"
+                                        d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
 
-                        <a href="{{ route('site.mySales') }}"
-                            class="text-gray-100 mr-1 hidden lg:block 2xl:block bg-pumpkin-400 hover:bg-pumpkin-500 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
-                            Meus Pedidos
-                        </a>
+                            <a href="{{ route('site.mySales') }}"
+                                class="text-gray-100 mr-1 hidden bg-pumpkin-400 hover:bg-pumpkin-500 font-medium rounded-full text-xs px-3 py-1
+                                lg:text-base lg:block
+                                md:text-lg
+                                xl:text-base 
+                                2xl:block">
+                                Meus Pedidos
+                            </a>
 
-                        <a href="{{ route('site.logout') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor"
-                            class="size-5 block lg:hidden 2xl:hidden mr-2 text-pumpkin-600 hover:text-pumpkin-500">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                            </svg>
-                        </a>
+                            <a href="{{ route('site.logout') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor"
+                                    class="size-5 block lg:hidden 2xl:hidden mr-2 text-pumpkin-600 hover:text-pumpkin-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                                </svg>
+                            </a>
 
-                        <a href="{{ route('site.logout') }}"
-                            class="text-gray-100 mr-1 hidden lg:block 2xl:block bg-pumpkin-600 hover:bg-pumpkin-700 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
-                            Sair
-                        </a>
-                    </div>
+                            <a href="{{ route('site.logout') }}"
+                                class="text-gray-100 mr-1 hidden bg-pumpkin-600 hover:bg-pumpkin-700 font-medium rounded-full text-xs px-3 py-1
+                                md:text-lg 
+                                lg:text-base lg:block 
+                                xl:text-base 
+                                2xl:block">
+                                Sair
+                            </a>
+                        </div>
                     @else
-                    <a href="{{ route('site.login') }}"
-                        class="text-gray-100 mr-3 bg-pumpkin-400 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
-                        Login
-                    </a>
+                        <a href="{{ route('site.login') }}"
+                            class="text-gray-100 mr-3 bg-pumpkin-400 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
+                            Login
+                        </a>
                     @endauth
                 </div>
             </div>
@@ -117,10 +125,9 @@
                 id="mobile-search-header">
                 <form class="bg-pumpkin-600 h-10 flex items-center w-full lg:w-80 2xl:lg:w-80" method="GET"
                     action="{{ route('site.home') }}" id="mobile-search-form">
-                    <button type="submit"
-                        class="text-vivid-violet-950 font-medium rounded-r-lg text-sm px-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="size-4">
+                    <button type="submit" class="text-vivid-violet-950 font-medium rounded-r-lg text-sm px-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
