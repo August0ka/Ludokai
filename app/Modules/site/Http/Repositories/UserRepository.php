@@ -32,6 +32,7 @@ class UserRepository extends BaseRepository
     {
         return $this->model
             ->newQuery()
+            ->orderBy('name')
             ->pluck('name', 'id');
     }
 }

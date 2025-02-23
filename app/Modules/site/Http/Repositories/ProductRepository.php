@@ -35,4 +35,20 @@ class ProductRepository extends BaseRepository
     {
         return $this->model->find($id);
     }
+
+    public function select()
+    {
+        return $this->model
+            ->newQuery()
+            ->select('id', 'name', 'price', 'quantity')
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function updateQuantity($id, $quantity)
+    {
+        $product = $this->model->find($id);
+        $product->quantity -= $quantity;
+        $product->save();
+    }
 }

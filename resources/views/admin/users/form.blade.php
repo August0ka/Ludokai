@@ -29,9 +29,15 @@
                     class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                     required>
             </div>
-            <div class="col-span-1 lg:col-span-6">
+            <div class="col-span-1 lg:col-span-3">
                 <label for="cpf" class="block text-sm font-medium text-pumpkin-400">CPF</label>
                 <input type="text" id="cpf" name="cpf" value="{{ isset($user) ? $user->cpf : '' }}"
+                    class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
+                    required>
+            </div>
+            <div class="col-span-1 lg:col-span-3">
+                <label for="phone" class="block text-sm font-medium text-pumpkin-400">Celular</label>
+                <input type="text" id="phone" name="phone" value="{{ isset($user) ? $user->phone : '' }}"
                     class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                     required>
             </div>
@@ -55,13 +61,19 @@
                     required>
             </div>
 
-            <div class="col-span-2 lg:col-span-6">
+            <div class="col-span-2 lg:col-span-2">
+                <label for="cep" class="block text-sm font-medium text-pumpkin-400">CEP</label>
+                <input type="text" id="cep" name="cep" value="{{ isset($user) ? $user->cep : '' }}"
+                    class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
+                    required>
+            </div>
+            <div class="col-span-2 lg:col-span-2">
                 <label for="city" class="block text-sm font-medium text-pumpkin-400">Cidade</label>
                 <input type="text" id="city" name="city" value="{{ isset($user) ? $user->city : '' }}"
                     class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                     required>
             </div>
-            <div class="col-span-1 lg:col-span-6">
+            <div class="col-span-1 lg:col-span-2">
                 <label for="state" class="block text-sm font-medium text-pumpkin-400">Estado</label>
                 <select
                     name="state"
@@ -91,6 +103,8 @@
 <script>
     $(document).ready(function() {
         $('#cpf').mask('000.000.000-00');
+        $('#phone').mask('(00) 00000-0000');
+        $('#cep').mask('00000-000');
     })
 </script>
 @endsection
