@@ -52,7 +52,8 @@
                                     </svg>
                                 </a>
 
-                                <button type="button"
+                                <button type="button" data-url="{{ route('admin.products.destroy', '') }}"
+                                    value="{{ $product->id }}"
                                     class="delete-button flex items-center justify-center bg-pink-700 hover:bg-pink-600 rounded-full p-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="text-pumpkin-100 size-5">
@@ -78,6 +79,11 @@
     <script>
         $(document).ready(function() {
             $(".delete-button").on('click', function() {
+                let productId = $(this).val();
+                let baseUrl = $(this).data('url');
+
+                let deleteUrl = `${baseUrl}/${productId}`;
+
                 Swal.fire({
                     title: "Tem certeza que deseja deletar ?",
                     text: "Esse processo é irreversível",
@@ -86,28 +92,23 @@
                     denyButtonText: "Não"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        let url =
-                            "{{ !isset($product) ? null : route('admin.products.destroy', $product->id) }}"
-
-                        if (url) {
-                            $.ajax({
-                                headers: {
-                                    'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                                },
-                                type: "delete",
-                                url: url,
-                                success: function(response) {
-                                    if (!response.success) {
-                                        return Swal.fire({
-                                            title: "Erro",
-                                            text: response.message,
-                                            icon: "error",
-                                        });
-                                    }
-                                    return window.location.reload();
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                            },
+                            type: "delete",
+                            url: deleteUrl,
+                            success: function(response) {
+                                if (!response.success) {
+                                    return Swal.fire({
+                                        title: "Erro",
+                                        text: response.message,
+                                        icon: "error",
+                                    });
                                 }
-                            });
-                        }
+                                return window.location.reload();
+                            }
+                        });
                     }
                 });
             });
