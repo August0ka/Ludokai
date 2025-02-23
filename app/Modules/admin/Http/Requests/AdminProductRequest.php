@@ -21,16 +21,27 @@ class AdminProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
             'category_id' => 'required|integer',
             'quantity' => 'required|integer',
+        ];
+
+        if ($this->method() == 'PUT') {
+            return $rules;
+        }
+
+        $otherRules = [
             'main_image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
             'product_images' => 'required|array',
-            'product_images.*' => 'image|mimes:jpeg,png,jpg,svg,webp'
+            'product_images.*' => 'image|mimes:jpeg,png,jpg,svg,webp' 
         ];
+
+        $rules = array_merge($rules, $otherRules);
+
+        return $rules;
     }
 
     public function messages(): array

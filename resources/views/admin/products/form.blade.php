@@ -85,8 +85,9 @@
                     <input
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         id="main_image" name="main_image" type="file" accept="image/*">
-                    <div id="image_preview" class="mt-3 hidden">
-                        <img id="preview_img" src="" alt="Prévia da Imagem" class="h-24 rounded-lg shadow-md">
+                    <div id="image_preview" class="mt-3 {{ isset($product) ? '' : 'hidden' }}">
+                        <img id="preview_img" src="{{ isset($product) ? asset('storage/' . $product->main_image) : '' }}"
+                            alt="Prévia da Imagem" class="h-24 rounded-lg shadow-md">
                     </div>
                     @error('main_image')
                         <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
@@ -98,7 +99,24 @@
                     <input
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         id="product_images" name="product_images[]" type="file" accept="image/*" multiple>
-                    <div id="images_preview" class="mt-3 flex flex-wrap gap-2"></div>
+
+                    @if (isset($product))
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            @foreach ($product->productImages as $productImage)
+                                <div class="relative w-20 h-20" id="{{ $productImage->id }}">
+                                    <img src="{{ asset('storage/' . $productImage->image) }}" class="w-full h-full object-contain rounded-lg shadow-md">
+                                    <button class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 text-xs flex items-center justify-center remove-btn" 
+                                        data-id="{{ $productImage->id }}" 
+                                        data-file="{{ $productImage->id }}">
+                                        ×
+                                    </button>
+                                </div> 
+                            @endforeach
+                            </div>
+                        @else
+                            <div id="images_preview" class="mt-3 flex flex-wrap gap-2"></div>
+                    @endif
+
                     @error('product_images')
                         <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                     @enderror
@@ -134,14 +152,13 @@
                 }
             });
 
-            // Adicionar imagens secundárias com botão de remoção
             $("#product_images").on("change", function(event) {
                 let newFiles = Array.from(event.target.files);
 
                 newFiles.forEach((file) => {
                     let uniqueId = `img-${Date.now()}-${Math.random()}`;
 
-                    storedFiles.push(file); // Adiciona a imagem ao array global
+                    storedFiles.push(file);
 
                     let reader = new FileReader();
                     reader.onload = function(e) {
