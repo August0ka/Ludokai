@@ -6,11 +6,13 @@ use App\Modules\site\Http\Repositories\SaleRepository;
 use App\Modules\admin\Http\Requests\AdminSaleRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Modules\site\Http\Repositories\ProductRepository;
 use App\Modules\site\Http\Repositories\UserRepository;
 
 class AdminSaleController extends Controller
 {
     public function __construct(
+        protected ProductRepository $productRepository,
         protected SaleRepository $saleRepository,
         protected UserRepository $userRepository
     ) {}
@@ -25,13 +27,15 @@ class AdminSaleController extends Controller
     public function create()
     {
         $users = $this->userRepository->pluck();
+        $products = $this->productRepository->select();
 
-        return view('admin.sales.form', compact('users'));
+        return view('admin.sales.form', compact('users', 'products'));
     }
 
     public function store(AdminSaleRequest $request)
     {
         $inputs = $request->validated();
+        $this->productRepository->updateQuantity($inputs['product_id'], $inputs['quantity']);
 
         $this->saleRepository->create($inputs);
 
@@ -41,13 +45,16 @@ class AdminSaleController extends Controller
     public function edit(Sale $sale)
     {
         $users = $this->userRepository->pluck();
+        $products = $this->productRepository->select();
 
-        return view('admin.sales.form', compact('sale', 'users'));
+        return view('admin.sales.form', compact('sale', 'users', 'products'));
     }
 
     public function update(AdminSaleRequest $request, sale $sale)
     {
         $inputs = $request->validated();
+        $this->productRepository->updateQuantity($inputs['product_id'], $inputs['quantity']);
+
 
         $this->saleRepository->update($inputs, $sale->id);
 

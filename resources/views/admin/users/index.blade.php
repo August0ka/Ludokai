@@ -57,7 +57,9 @@
                                 </a>
 
                                 <button type="button"
-                                    class="delete-button flex items-center justify-center bg-pink-700 hover:bg-pink-600 rounded-full p-1">
+                                    class="delete-button flex items-center justify-center bg-pink-700 hover:bg-pink-600 rounded-full p-1"
+                                    data-url="{{ route('admin.users.destroy', '') }}"
+                                    value="{{ $user->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="text-pumpkin-100 size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -82,6 +84,11 @@
     <script>
         $(document).ready(function() {
             $(".delete-button").on('click', function() {
+                let userId = $(this).val();
+                let baseUrl = $(this).data('url');
+
+                let deleteUrl = `${baseUrl}/${userId}`;
+
                 Swal.fire({
                     title: "Tem certeza que deseja deletar ?",
                     text: "Esse processo é irreversível",
@@ -90,15 +97,12 @@
                     denyButtonText: "Não"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        let url =
-                            "{{ !isset($user) ? null : route('admin.users.destroy', $user->id) }}"
-
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': "{{ csrf_token() }}",
                             },
                             type: "delete",
-                            url: url,
+                            url: deleteUrl,
                             success: function(response) {
                                 if (!response.success) {
                                     return Swal.fire({

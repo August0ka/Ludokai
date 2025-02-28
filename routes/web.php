@@ -13,7 +13,7 @@ use App\Modules\site\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 // Site routes
-Route::get('show/product/{product}',  [ProductController::class, 'index'])->name('site.show.product');
+Route::get('show/product/{product}', [ProductController::class, 'index'])->name('site.show.product');
 Route::get('register', [AuthController::class, 'register'])->name('site.register');
 Route::get('login', [AuthController::class, 'login'])->name('site.login');
 Route::get('/', [HomeController::class, 'index'])->name('site.home');

@@ -22,7 +22,6 @@ class AdminSaleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
             'user_id' => 'required|integer',
             'product_id' => 'required|integer',
             'value' => 'required|numeric',
@@ -35,12 +34,27 @@ class AdminSaleRequest extends FormRequest
     {
         if ($this->has('value')) {
             $this->merge([
-                'value' => str_replace(',', '.', str_replace('.', '', $this->input('value'))),
+                'value' => (float)str_replace(',', '.', str_replace('.', '', $this->input('value'))),
             ]);
         }
         if ($this->has('total')) {
             $this->merge([
-                'total' => str_replace(',', '.', str_replace('.', '', $this->input('total'))),
+                'total' => (float)str_replace(',', '.', str_replace('.', '', $this->input('total'))),
+            ]);
+        }
+        if ($this->has('user_id')) {
+            $this->merge([
+                'user_id' => (int)$this->input('user_id'),
+            ]);
+        }
+        if ($this->has('product_id')) {
+            $this->merge([
+                'product_id' => (int)$this->input('product_id'),
+            ]);
+        }
+        if ($this->has('quantity')) {
+            $this->merge([
+                'quantity' => (int)$this->input('quantity'),
             ]);
         }
     }

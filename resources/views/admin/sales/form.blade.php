@@ -23,33 +23,45 @@
             @endif
             @csrf
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-2 lg:col-span-6">
+                <div class="col-span-2 lg:col-span-3">
                     <label for="user_id" class="block text-sm font-medium text-pumpkin-400">Comprador</label>
                     <select name="user_id" id="user_id"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
                         <option value="">Selecione...</option>
                         @foreach ($users as $index => $userName)
                             <option value="{{ $index }}"
-                                {{ isset($user) && $user->id == $index ? 'selected' : '' }}>
+                                {{ isset($sale) && $sale->user_id == $index ? 'selected' : '' }}>
                                 {{ $userName }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-1 lg:col-span-6">
+                <div class="col-span-1 lg:col-span-3">
                     <label for="product_id" class="block text-sm font-medium text-pumpkin-400">Produto</label>
-                    <input type="text" id="product_id" name="product_id"
-                        value="{{ isset($sale) ? $sale->product->name : '' }}"
-                        class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
-                        required>
+                    <select name="product_id" id="product_id"
+                        class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
+                        <option value="">Selecione...</option>
+                        @foreach ($products as $product)
+                            <option value="{{ $product->id }}" data-price="{{ $product->price }}"
+                                {{ isset($sale) && $sale->product_id == $product->id ? 'selected' : '' }}>
+                                {{ $product->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="col-span-2 lg:col-span-6">
+                <div class="col-span-2 lg:col-span-2">
                     <label for="value" class="block text-sm font-medium text-pumpkin-400">Valor</label>
                     <input type="text" id="value" name="value" value="{{ isset($sale) ? $sale->value : '' }}"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         required>
                 </div>
-                <div class="col-span-3 lg:col-span-6">
+                <div class="col-span-2 lg:col-span-2">
+                    <label for="quantity" class="block text-sm font-medium text-pumpkin-400">Quantidade</label>
+                    <input type="number" id="quantity" name="quantity" value="{{ isset($sale) ? $sale->quantity : '' }}" min="1"
+                        class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
+                        required>
+                </div>
+                <div class="col-span-3 lg:col-span-2">
                     <label for="total" class="block text-sm font-medium text-pumpkin-400">Total</label>
                     <input type="text" id="total" name="total" value="{{ isset($sale) ? $sale->total : '' }}"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
@@ -72,6 +84,30 @@
             });
             $('#total').mask("#.##0,00", {
                 reverse: true
+            });
+
+            $('#product_id').change(function() {
+                let product_id = $(this).val();
+                let value = String($(this).find(':selected').data('price'));
+                let formattedValue = value.replace('.', ',');
+
+
+                $('#value').val(formattedValue);
+            });
+
+            $('#quantity').on('input', function() {
+                let quantity = $(this).val();
+
+                if (quantity === '') {
+                    quantity = 0;
+                }
+
+                let value = $('#value').val();
+                let formattedValue = value.replace('.', '').replace(',', '.');
+
+                let total = quantity * formattedValue;
+
+                $('#total').val(total.toFixed(2).replace('.', ','));
             });
         })
     </script>
