@@ -53,10 +53,10 @@ class PagBankService
         [
           "reference_id" => (string)$this->product->id,
           "name" => $this->product->name,
-          "description" => Str::length($this->product->description) > 246 ? Str::limit($this->product->description, 247) : $this->product->description,
+          "description" => Str::length($this->product->description) > 240 ? Str::limit($this->product->description, 240) : $this->product->description,
           "quantity" => $this->product->quantity,
           "unit_amount" => $productPrice,
-          // "image_url" => asset('storage/' . $this->product->main_image)
+          "image_url" => asset('storage/' . $this->product->main_image)
         ]
       ],
       "payment_methods" => [
@@ -65,8 +65,9 @@ class PagBankService
         ["type" => "DEBIT_CARD"],
         ["type" => "PIX"]
       ],
-      // "redirect_url" => route('site.finish.sale'),
-      "soft_descriptor" => "teste"
+      "redirect_url" => route('site.finish.sale'),
+      "soft_descriptor" => "teste",
+      "notification_urls" => route('pagbank.checkout.webhook')
     ];
 
     return $body;

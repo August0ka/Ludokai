@@ -35,4 +35,12 @@ class UserRepository extends BaseRepository
             ->orderBy('name')
             ->pluck('name', 'id');
     }
+
+    public function findByCpf(string $cpf)
+    {
+        return $this->model
+            ->newQuery()
+            ->where('cpf', $cpf)
+            ->first();
+    }
 }
