@@ -15,7 +15,6 @@ class PagBankService
     $redirectUrl = "https://{$sandbox}api.pagseguro.com/checkouts";
     $body = $this->mountBody();
 
-
     $data = Http::withHeaders([
       'Authorization' => "Bearer $token",
       'Content-type' => 'application/json',
@@ -66,8 +65,7 @@ class PagBankService
         ["type" => "PIX"]
       ],
       "redirect_url" => route('site.finish.sale'),
-      "soft_descriptor" => "teste",
-      "notification_urls" => route('pagbank.checkout.webhook')
+      "notification_urls" => [route('pagbank.checkout.webhook')]
     ];
 
     return $body;
