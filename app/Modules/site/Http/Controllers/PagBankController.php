@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Modules\site\Http\Repositories\{
   PagseguroTransactionRepository,
   ProductRepository,
-    UserRepository
+  SaleRepository,
+  UserRepository
 };
 use Illuminate\Http\Request;;
 
@@ -16,6 +17,7 @@ class PagBankController extends Controller
   public function __construct(
     protected PagseguroTransactionRepository $pagseguroTransactionRepository,
     protected ProductRepository $productRepository,
+    protected SaleRepository $saleRepository,
     protected UserRepository $userRepository
   ) {}
 
@@ -68,11 +70,26 @@ class PagBankController extends Controller
   public function checkoutWebhook(Request $request)
   {
     $data = $request->all();
+
     $product = $data['items'][0];
     $charges = $data['charges'][0];
 
     if ($charges['status'] == 'PAID') {
       $this->productRepository->updateQuantity($product['reference_id'], $product['quantity']);
+
+      $user = $this->userRepository->findByCpf($data['customer']['tax_id']);
+      $unitAmount = $product['unit_amount'] / 100;
+      $totalValue = ($product['unit_amount'] * $product['quantity']) / 100;
+
+      $sale = [
+        'product_id' => $product['reference_id'],
+        'user_id' => $user->id,
+        'quantity' => $product['quantity'],
+        'value' => $unitAmount,
+        'total' => $totalValue
+      ];
+
+      $this->saleRepository->create($sale);
     }
   }
 }

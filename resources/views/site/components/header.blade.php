@@ -114,8 +114,8 @@
                         </div>
                     @else
                         <a href="{{ route('site.login') }}"
-                            class="text-gray-100 mr-3 bg-pumpkin-400 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
-                            Login
+                            class="text-gray-100 mr-3 bg-pumpkin-400 hover:bg-pumpkin-500 font-medium rounded-full text-xs md:text-lg xl:text-base px-3 py-1">
+                            Entrar
                         </a>
                     @endauth
                 </div>

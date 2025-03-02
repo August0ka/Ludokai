@@ -6,8 +6,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
             @foreach ($products as $product)
                 <a href="{{ $product->quantity != 0 ? route('site.show.product', $product->id) : '' }}">
-                    <div class="product-card flex flex-col bg-pumpkin-100 shadow-lg rounded-lg overflow-hidden h-full w-full">
-                        <img src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->name }}"
+                    <div class="product-card hover:ease-out hover:duration-300 flex flex-col bg-pumpkin-100 hover:bg-pumpkin-200 shadow-lg rounded-lg overflow-hidden h-full w-full hover:scale-105 transition-transform duration-300">                        <img src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->name }}"
                             class="w-full h-56 2xl:h-72 object-cover object-center">
                         <hr class="w-full border-t border-gray-200">
                         <div class="p-4 flex flex-col product-info flex-grow justify-between w-full">
