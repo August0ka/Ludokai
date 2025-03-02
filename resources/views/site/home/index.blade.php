@@ -6,7 +6,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
             @foreach ($products as $product)
                 <a href="{{ $product->quantity != 0 ? route('site.show.product', $product->id) : '' }}">
-                    <div class="flex flex-col items-center bg-pumpkin-100 shadow-lg rounded-lg overflow-hidden">
+                    <div class="product-card flex flex-col items-center bg-pumpkin-100 shadow-lg rounded-lg overflow-hidden">
                         <img src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->name }}"
                             class="w-full h-56 2xl:h-72 object-cover object-center">
 
@@ -21,4 +21,30 @@
             @endforeach
         </div>
     </div>
+@endsection
+
+@section('site_scripts')
+<script>
+$(document).ready(function () {
+    function equalizeCardHeights() {
+        $('.product-card').css('height', 'auto');
+        
+        let maxHeight = 0;
+        $('.product-card').each(function () {
+            let cardHeight = $(this).outerHeight();
+            if (cardHeight > maxHeight) {
+                maxHeight = cardHeight;
+            }
+        });
+
+        $('.product-card').css('height', maxHeight + 'px');
+    }
+
+    equalizeCardHeights();
+
+    $(window).resize(function () {
+        equalizeCardHeights();
+    });
+});
+</script>
 @endsection
