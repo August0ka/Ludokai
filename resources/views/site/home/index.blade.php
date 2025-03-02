@@ -6,13 +6,14 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
             @foreach ($products as $product)
                 <a href="{{ $product->quantity != 0 ? route('site.show.product', $product->id) : '' }}">
-                    <div class="product-card flex flex-col items-center bg-pumpkin-100 shadow-lg rounded-lg overflow-hidden">
+                    <div class="product-card flex flex-col bg-pumpkin-100 shadow-lg rounded-lg overflow-hidden h-full w-full">
                         <img src="{{ asset('storage/' . $product->main_image) }}" alt="{{ $product->name }}"
                             class="w-full h-56 2xl:h-72 object-cover object-center">
-
                         <hr class="w-full border-t border-gray-200">
-                        <div class="p-4 flex flex-col">
-                            <p class="text-sm sm:text-lg font-semibold text-gray-700">{{ $product->name }}</p>
+                        <div class="p-4 flex flex-col product-info flex-grow justify-between w-full">
+                            <p class="text-sm sm:text-sm xl:text-base font-semibold text-gray-700 line-clamp-3 xl:line-clamp-2 overflow-hidden">
+                                {{ $product->name }}
+                            </p>
                             <p class="text-gray-950 mt-2 text-left font-bold text-sm">
                                 {{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</p>
                         </div>
@@ -27,8 +28,7 @@
 <script>
 $(document).ready(function () {
     function equalizeCardHeights() {
-        $('.product-card').css('height', 'auto');
-        
+        $('.product-card').css({'height': 'auto', 'width': '100%'});
         let maxHeight = 0;
         $('.product-card').each(function () {
             let cardHeight = $(this).outerHeight();
@@ -36,15 +36,11 @@ $(document).ready(function () {
                 maxHeight = cardHeight;
             }
         });
-
-        $('.product-card').css('height', maxHeight + 'px');
+        $('.product-card').css({'height': maxHeight + 'px', 'width': '100%'});
     }
 
     equalizeCardHeights();
-
-    $(window).resize(function () {
-        equalizeCardHeights();
-    });
+    $(window).resize(equalizeCardHeights);
 });
 </script>
 @endsection

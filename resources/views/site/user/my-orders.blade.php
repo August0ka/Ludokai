@@ -22,12 +22,12 @@
     @empty
         <div class="flex flex-col items-center justify-center mt-5">
             <div class="flex justify-center">
-                <img src="{{ asset('images/ludokai_cat.png') }}" alt="ludokai_cat" class="w-80 h-80">
+                <img src="{{ asset('images/ludokai_cat.png') }}" alt="ludokai_cat" class="w-80 h-80 object-contain">
             </div>
             <div class="text-gray-100 text-center ml-8 lg:mx-auto text-lg lg:text-xl mt-4">
                 <p class="mb-2">Ei, sou o Ludo, o gatinho cósmico!</p>
                 <p class="mb-2">Tá esperando o quê?</p>
-                <p>O universo tá aqui te desafiando a fazer sua primeira compra e brilhar mais que as estrelas!</p>
+                <p>O universo tá aqui te desafiando a fazer sua primeira compra!</p>
             </div>
         </div>
     @endforelse
