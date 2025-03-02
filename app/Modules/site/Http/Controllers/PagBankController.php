@@ -71,7 +71,7 @@ class PagBankController extends Controller
     $product = $data['items'][0];
     $charges = $data['charges'][0];
 
-    if ($charges['statatus'] == 'PAID') {
+    if ($charges['status'] == 'PAID') {
       $this->productRepository->updateQuantity($product['reference_id'], $product['quantity']);
     }
   }
