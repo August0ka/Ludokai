@@ -34,7 +34,8 @@
 
                 @foreach ($productImages as $productImage)
                     <div
-                        class="bg-pumpkin-200 w-24 rounded-lg overflow-hidden cursor-pointer miniature 
+                        class="bg-pumpkin-200 w-24 rounded-lg overflow-hidden cursor-pointer miniature
+                            hover:opacity-60 hover:ease-out hover:duration-300 hover:scale-105 transition-transform duration-300
                             md:w-[119px] 
                             lg:w-[119px] 
                             2xl:w-32">
