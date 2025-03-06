@@ -3,11 +3,13 @@
 <header>
     <nav class="py-2.5">
         <div class="grid grid-cols-12 text-gray-200">
-            <a href="/" class="col-span-12 mb-3 ml-5">
-                <div class="flex items-center">
-                    <img src="{{ asset('images/banner.svg') }}" class="w-28 lg:w-32" alt="Ludokai_banner" />
+            <div class="col-span-12 mb-3 ml-5">
+                <div class="flex">
+                    <a href="/">
+                        <img src="{{ asset('images/banner.svg') }}" class="w-28 lg:w-32 hover:scale-110 transition-transform duration-300" alt="Ludokai_banner" />
+                    </a>
                 </div>
-            </a>
+                </div>
             <div class="col-span-12 h-10 bg-vivid-violet-950 flex items-center justify-between" id="web-header">
                 <div class="flex ml-3 lg:ml-5">
                     <div class="relative mr-2" id="dropdown-container">
