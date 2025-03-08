@@ -22,7 +22,9 @@
     @empty
         <div class="flex flex-col items-center justify-center mt-5">
             <div class="flex justify-center">
-                <img src="{{ asset('images/ludokai_cat.png') }}" alt="ludokai_cat" class="w-80 h-80 object-contain">
+                <a href="{{ route('site.home') }}">
+                    <img src="{{ asset('images/ludokai_cat.png') }}" alt="ludokai_cat" class="w-80 h-80 object-contain cursor-pointer hover:scale-110 transition-transform duration-300">
+                </a>
             </div>
             <div class="text-gray-100 text-center ml-8 lg:mx-auto text-lg lg:text-xl mt-4">
                 <p class="mb-2">Ei, sou o Ludo, o gatinho cósmico!</p>

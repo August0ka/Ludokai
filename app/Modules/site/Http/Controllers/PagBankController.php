@@ -27,6 +27,11 @@ class PagBankController extends Controller
     $quantity = $request->get('quantity');
 
     $product = $this->productRepository->find($request->get('product_id'));
+
+    if ($quantity > $product->quantity) {
+      return redirect()->back()->with('error', 'Quantidade indisponível em estoque');
+    }
+
     $product->quantity = $quantity;
     $product->total = $product->price * $quantity;
 

@@ -58,9 +58,9 @@
 
                 <h3 class="text-xl font-bold text-green-600">{{ 'R$ ' . number_format($product->price, 2, ',', '.') }}</h3>
 
-                <a href="{{ route('site.product.purchase', $product->id) }}"
-                    class="bg-green-500 w-fit h-fit px-2 py-1 mt-2 text-white rounded-full hover:bg-green-600 ">
-                    Comprar
+                <a href="{{ $product->quantity != 0 ? route('site.product.purchase', $product->id) : '#' }}"
+                    class="{{ $product->quantity != 0 ? 'bg-green-500 hover:bg-green-600' : 'bg-pumpkin-400 hover:bg-pumpkin-500 pointer-events-none' }} w-fit h-fit px-2 py-1 mt-2 text-white rounded-full transition-transform duration-300 hover:scale-11">
+                    {{  $product->quantity != 0 ? 'Comprar' : 'Sem estoque' }}
                 </a>
             </div>
         </div>

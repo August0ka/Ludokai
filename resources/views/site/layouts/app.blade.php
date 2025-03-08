@@ -44,6 +44,7 @@
     </script>
 
     @yield('site_scripts')
+    @stack('site_scripts')
 </body>
 
 </html>
