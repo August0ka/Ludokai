@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\URL;
+use App\View\Components\BeautifulAlert;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Carbon::setLocale('pt_BR');
+        Blade::component('package-beautiful-alert', BeautifulAlert::class);
     }
 }
