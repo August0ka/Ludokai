@@ -24,7 +24,12 @@ class PagBankController extends Controller
   public function redirectToCheckout(Request $request)
   {
     $customer = auth()->user();
+
     $quantity = $request->get('quantity');
+
+    if ($quantity <= 0) {
+      return redirect()->back()->with('error', 'Quantidade inválida');
+    }
 
     $product = $this->productRepository->find($request->get('product_id'));
 
