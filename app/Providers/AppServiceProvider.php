@@ -29,5 +29,23 @@ class AppServiceProvider extends ServiceProvider
 
         Carbon::setLocale('pt_BR');
         Blade::component('package-beautiful-alert', BeautifulAlert::class);
+
+        // Blade::if('hasBeautifulAlert', function () {
+        //     return session()->has('beautiful_alert');
+        // });
+        
+        // Blade::directive('beautifulAlertScript', function () {
+        //     return '<script src="' . asset('js/beautiful-alert.js') . '"></script>';
+        // });
+        
+        // if (!function_exists('beautiful_alert')) {
+        //     function beautiful_alert($message, $type = 'success', $title = 'Aviso') {
+        //         session()->flash('beautiful_alert', [
+        //             'type' => $type,
+        //             'message' => $message,
+        //             'title' => $title
+        //         ]);
+        //     }
+        // }
     }
 }

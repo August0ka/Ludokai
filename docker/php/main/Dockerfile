@@ -43,6 +43,16 @@ COPY --chown=www:www . /var/www/
 # Configura o Nginx
 COPY docker/nginx/main/conf.d /etc/nginx/conf.d/default.conf
 
+# Cria os diretórios de armazenamento
+RUN mkdir -p /var/www/storage /var/data && \
+    chown -R www-data:www-data /var/www && \
+    chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
+    chown -R www-data:www-data /var/data && \
+    chmod -R 775 /var/data && \
+    mkdir -p /var/data/logs && \
+    chown -R www-data:www-data /var/data/logs && \
+    chmod -R 775 /var/data/logs
+
 # Cria o script de start
 RUN echo '#!/bin/bash\n\
 composer install --no-dev --optimize-autoloader --no-interaction\n\
@@ -63,13 +73,6 @@ nginx -g "daemon off;"' > /start.sh
 
 # Torna o script executável
 RUN chmod +x /start.sh
-
-# Garante que os diretórios existam e ajusta as permissões
-RUN mkdir -p /var/www/storage /var/data && \
-    chown -R www-data:www-data /var/www && \
-    chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
-    chown -R www-data:www-data /var/data && \
-    chmod -R 775 /var/data
 
 EXPOSE 8080
 ENV PORT=8080
