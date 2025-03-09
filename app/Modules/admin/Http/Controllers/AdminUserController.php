@@ -21,6 +21,10 @@ class AdminUserController extends Controller
         $users = $this->userRepository->fetchAll();
         $states = $this->getStates();
 
+        foreach ($users as $user) {
+            $user->city = $this->getCityName($user->city);
+        }
+
         return view('admin.users.index', compact('users', 'states'));
     }
 
@@ -43,6 +47,7 @@ class AdminUserController extends Controller
     public function edit(User $user)
     {
         $states = $this->getStates();
+
         return view('admin.users.form', compact('user', 'states'));
     }
 
@@ -72,7 +77,7 @@ class AdminUserController extends Controller
         }
     }
 
-    public function getStates() 
+    public function getStates()
     {
         $statesArray = Http::get('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')->json();
 
@@ -82,5 +87,12 @@ class AdminUserController extends Controller
         }
 
         return $states;
+    }
+
+    public function getCityName($cityId)
+    {
+        $cityResponse = Http::get("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/$cityId")->json();
+
+        return $cityResponse['nome'];        
     }
 }
