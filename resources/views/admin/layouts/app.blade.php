@@ -8,12 +8,36 @@
     <title>Ludokai Admin</title>
 </head>
 
-<body>
-    <div class="flex min-h-screen">
+<body class="overflow-x-hidden">
+    <!-- Mobile Toggle Button (fixed) -->
+    <div class="fixed top-0 left-0 z-30 lg:hidden bg-vivid-violet-950 p-2 flex justify-between items-center w-full">
+        <button id="toggleSidebar" class="text-white p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+        <div class="flex justify-start">
+            <img class="h-10" src="{{ asset('images/banner.svg') }}" alt="Ludokai_banner">
+        </div>
+    </div>
+
+    <!-- Dark Overlay (mobile only) -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+    <div class="flex lg:min-h-screen">
         <!-- Sidebar -->
-        <nav id="sidebarMenu" class="bg-vivid-violet-950 w-48 p-4 shadow-md">
-            <div class="flex justify-start">
-                <img class="h-20" src="{{ asset('images/banner.svg') }}" alt="Ludokai_banner">
+        <nav id="sidebarMenu"
+            class="fixed top-0 left-0 h-full bg-vivid-violet-950 w-64 p-4 shadow-md z-40 lg:z-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-48">
+            <div class="flex justify-between items-center mb-6">
+                <img class="h-16" src="{{ asset('images/banner.svg') }}" alt="Ludokai_banner">
+                <!-- Close button (mobile only) -->
+                <button id="closeSidebar" class="lg:hidden text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
             <div class="flex flex-col mt-5">
                 <div class="flex-1">
@@ -105,7 +129,7 @@
         </nav>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6">
+        <main class="flex-1 ml-0 lg:ml-48 p-2 lg:p-6 mt-6 lg:mt-0">
             @yield('content')
         </main>
     </div>
@@ -116,6 +140,40 @@
         integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#toggleSidebar').click(function() {
+                $('#sidebarMenu').removeClass('-translate-x-full');
+                $('#sidebarOverlay').removeClass('hidden');
+                $('body').addClass('overflow-hidden');
+            });
+
+            $('#closeSidebar, #sidebarOverlay').click(function() {
+                $('#sidebarMenu').addClass('-translate-x-full');
+                $('#sidebarOverlay').addClass('hidden');
+                $('body').removeClass('overflow-hidden');
+            });
+
+            if (window.innerWidth < 1024) {
+                $('#sidebarMenu a').click(function() {
+                    $('#sidebarMenu').addClass('-translate-x-full');
+                    $('#sidebarOverlay').addClass('hidden');
+                    $('body').removeClass('overflow-hidden');
+                });
+            }
+
+            $(window).resize(function() {
+                if (window.innerWidth >= 1024) {
+                    $('#sidebarMenu').removeClass('-translate-x-full');
+                    $('#sidebarOverlay').addClass('hidden');
+                    $('body').removeClass('overflow-hidden');
+                } else {
+                    $('#sidebarMenu').addClass('-translate-x-full');
+                }
+            });
+        });
+    </script>
 
     @yield('scripts')
 </body>

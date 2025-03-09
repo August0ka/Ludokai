@@ -21,6 +21,18 @@ class AdminAuthController extends Controller
     public function authenticate()
     {
         $credentials = request()->only('email', 'password');
+
+        if (!$credentials['email']) {
+            return back()->withErrors([
+                'login_errors' => 'O campo e-mail é obrigatório'
+            ]);
+        }
+
+        if (!$credentials['password']) {
+            return back()->withErrors([
+                'login_errors' => 'O campo senha é obrigatório'
+            ]);
+        }
         $admin = $this->adminRepository->findByEmail($credentials['email']);
 
         if (!$admin) {

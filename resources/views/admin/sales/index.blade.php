@@ -69,7 +69,7 @@
                         </tr>
                     @empty
                         <tr class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900">
-                            <td colspan="6" class="text-center py-2">Nenhum registro encontrado</td>
+                            <td colspan="7" class="text-center py-2">Nenhum registro encontrado</td>
                         </tr>
                     @endforelse
                 </tbody>

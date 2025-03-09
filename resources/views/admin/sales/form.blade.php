@@ -17,13 +17,13 @@
         </div>
         <form action="{{ isset($sale) ? route('admin.sales.update', [$sale->id]) : route('admin.sales.store') }}"
             enctype="multipart/form-data" method="POST"
-            class="space-y-6 bg-blue-night-900 rounded-lg px-6 py-0.5 mx-20 pb-5">
+            class="space-y-6 bg-blue-night-900 rounded-lg px-2 lg:px-6 py-0.5 mx-0 lg:mx-20 pb-5">
             @if (isset($sale))
                 @method('PUT')
             @endif
             @csrf
             <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-2 lg:col-span-3">
+                <div class="col-span-12 lg:col-span-3">
                     <label for="user_id" class="block text-sm font-medium text-pumpkin-400">Comprador</label>
                     <select name="user_id" id="user_id"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
@@ -36,7 +36,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-1 lg:col-span-3">
+                <div class="col-span-12 lg:col-span-3">
                     <label for="product_id" class="block text-sm font-medium text-pumpkin-400">Produto</label>
                     <select name="product_id" id="product_id"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
@@ -49,25 +49,25 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-span-2 lg:col-span-2">
+                <div class="col-span-4 lg:col-span-2">
                     <label for="value" class="block text-sm font-medium text-pumpkin-400">Valor</label>
                     <input type="text" id="value" name="value" value="{{ isset($sale) ? $sale->value : '' }}"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         required>
                 </div>
-                <div class="col-span-2 lg:col-span-2">
+                <div class="col-span-3 lg:col-span-2">
                     <label for="quantity" class="block text-sm font-medium text-pumpkin-400">Quantidade</label>
                     <input type="number" id="quantity" name="quantity" value="{{ isset($sale) ? $sale->quantity : '' }}" min="1"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         required>
                 </div>
-                <div class="col-span-3 lg:col-span-2">
+                <div class="col-span-5 lg:col-span-2">
                     <label for="total" class="block text-sm font-medium text-pumpkin-400">Total</label>
                     <input type="text" id="total" name="total" value="{{ isset($sale) ? $sale->total : '' }}"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         required>
                 </div>
-                <div class="col-span-2 lg:col-span-12 text-center">
+                <div class="col-span-12 lg:col-span-12 text-center">
                     <button type="submit"
                         class="px-4 py-2 bg-emerald-600 text-white rounded-full shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Salvar</button>
                 </div>
