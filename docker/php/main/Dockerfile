@@ -51,7 +51,7 @@ RUN mkdir -p /var/www/storage /var/data && \
     chmod -R 775 /var/data && \
     mkdir -p /var/data/logs && \
     chown -R www-data:www-data /var/data/logs && \
-    chmod -R 775 /var/data/logs\
+    chmod -R 775 /var/data/logs && \
     mkdir -p /var/www/storage/logs && \
     chown -R www-data:www-data /var/www/storage/logs && \
     chmod -R 775 /var/www/storage/logs
