@@ -16,6 +16,7 @@ class BeautifulAlert extends Component
         public string $confirmText = 'Sim',
         public string $declineText = 'Não',
         public string $type = 'success',
+        public bool $visible = false,
         public string $message = '',
         public string $title = ''
     ) {}

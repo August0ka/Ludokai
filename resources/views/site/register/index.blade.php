@@ -15,7 +15,7 @@
                 <h4 class="text-lg md:text-xl font-bold">Cadastro</h4>
             </div>
             <div class="p-4 bg-vivid-violet-950 rounded-b-lg text-xs md:text-base">
-            <form method="POST" action="{{ route('site.store.customer') }}">
+                <form method="POST" action="{{ route('site.store.customer') }}">
                     @csrf
                     <div class="grid grid-cols-12 gap-x-2 md:gap-x-3 gap-y-2 md:gap-y-3">
                         <div class="col-span-8 md:col-span-8">
@@ -61,21 +61,22 @@
                                 name="cep" required>
                         </div>
                         <div class="col-span-6">
-                            <label for="city" class="block text-pumpkin-300 font-medium mb-1">Cidade</label>
-                            <input id="city" type="text"
-                                class="w-full bg-pumpkin-200 border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pumpkin-500"
-                                name="city" required>
-                        </div>
-                        <div class="col-span-6">
                             <label for="state" class="block text-pumpkin-300 font-medium mb-1">Estado</label>
                             <select name="state" id="state"
                                 class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
                                 <option value="">Selecione...</option>
                                 @foreach ($states as $index => $state)
-                                <option value="{{ $index }}">
-                                    {{ $state }}
-                                </option>
+                                    <option value="{{ $index }}">
+                                        {{ $state }}
+                                    </option>
                                 @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-span-6">
+                            <label for="city" class="block text-pumpkin-300 font-medium mb-1">Cidade</label>
+                            <select name="city" id="city"
+                                class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm">
                             </select>
                         </div>
                         <div class="col-span-12 text-center">
@@ -92,11 +93,49 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#cpf').mask('000.000.000-00');
             $('#phone').mask('(00) 00000-0000');
             $('#cep').mask('00000-000');
+
+            $('#cep').on('blur', function() {
+                let cep = $(this).val().replace('-', '');
+                console.log(cep);
+                $.ajax({
+                    type: "GET",
+                    url: `https://viacep.com.br/ws/${cep}/json/`,
+                    success: function(response) {
+                        if (response.erro) {
+                            console.log('CEP não encontrado');
+                            return;
+                        }
+                        $('#address').val(response.logradouro);
+                    }
+                });
+            });
+
+            $('#city').on('click', function() {
+                let stateId = $('#state').val();
+            })
+
+            $('#state').change(function() {
+                let stateId = $(this).val();
+
+                $.ajax({
+                    type: "GET",
+                    url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`,
+                    success: function(response) {
+                        $('#city').empty();
+                        $('#city').append('<option value="">Selecione...</option>');
+                        response.forEach(city => {
+                            $('#city').append(
+                                `<option value="${city.id}">${city.nome}</option>`);
+                        });
+                    }
+                });
+            });
         })
     </script>
 </body>
