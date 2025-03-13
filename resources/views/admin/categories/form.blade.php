@@ -16,19 +16,19 @@
         </div>
     </div>
     <form action="{{ isset($category) ? route('admin.categories.update', [$category->id]) : route('admin.categories.store') }}"
-        enctype="multipart/form-data" method="POST" class="space-y-6 bg-blue-night-900 rounded-lg px-6 py-0.5 mx-20 pb-5">
+        enctype="multipart/form-data" method="POST" class="space-y-6 bg-blue-night-900 rounded-lg px-2 lg:px-6 py-0.5 mx-0 lg:mx-20 pb-5">
         @if (isset($category))
         @method('PUT')
         @endif
         @csrf
         <div class="grid grid-cols-12 items-end gap-4">
-            <div class="col-span-2 lg:col-span-6">
+            <div class="col-span-12 lg:col-span-6">
                 <label for="name" class="block text-sm font-medium text-pumpkin-400">Nome</label>
                 <input type="text" id="name" name="name" value="{{ isset($category) ? $category->name : '' }}"
                     class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                     required>
             </div>
-            <div class="col-span-2 lg:col-span-2">
+            <div class="col-span-12 lg:col-span-2 text-center">
                 <button type="submit"
                     class="px-4 py-2 bg-emerald-600 text-white rounded-full shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">Salvar</button>
             </div>

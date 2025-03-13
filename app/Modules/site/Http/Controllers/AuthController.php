@@ -20,6 +20,19 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+        if (!$credentials['email']) {
+            return back()->withErrors([
+                'login_errors' => 'O campo e-mail é obrigatório'
+            ]);
+        }
+
+        if (!$credentials['password']) {
+            return back()->withErrors([
+                'login_errors' => 'O campo senha é obrigatório'
+            ]);
+        }
+
         $user = $this->userRepository->findByEmail($credentials['email']);
 
         if (!$user) {
@@ -31,7 +44,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended();
+            return redirect()->route('site.home');
         }
 
         return back()->withErrors([

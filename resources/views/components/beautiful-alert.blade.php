@@ -1,4 +1,4 @@
-<div class="fixed inset-0 flex items-center justify-center z-[1000] beautiful-alert bg-black bg-opacity-50">
+<div class="fixed inset-0 flex items-center justify-center z-[1000] beautiful-alert bg-black bg-opacity-50 {{ $visible ? '' : 'hidden' }}">
     <div class="relative w-96 bg-blue-night-950 rounded-2xl shadow-pumpkin-400 shadow-md p-4">
         <div class="text-center text-gray-100 text-4xl mb-3">{{ $title }}</div>
         <div class="flex flex-col items-center justify-center mb-3">

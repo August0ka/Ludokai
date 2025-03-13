@@ -23,12 +23,12 @@
             @csrf
             <div>
               <label class="block text-pumpkin-300 text-sm font-bold mb-2" for="email">Email</label>
-              <input type="email" name="email" id="email" class="bg-pumpkin-200 shadow border focus:border-pumpkin-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('login_errors') border-red-500 @enderror" />
+              <input type="email" name="email" id="email" class="bg-pumpkin-200 shadow border focus:border-pumpkin-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('login_errors') border-red-500 @enderror" required/>
             </div>
 
             <div>
               <label class="block text-pumpkin-300 text-sm font-bold mb-2" for="password">Senha</label>
-              <input type="password" name="password" id="password" class="bg-pumpkin-200 shadow border focus:border-pumpkin-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('login_errors') border-red-500 @enderror" />
+              <input type="password" name="password" id="password" class="bg-pumpkin-200 shadow border focus:border-pumpkin-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('login_errors') border-red-500 @enderror" required/>
             </div>
 
             <div class="text-center mt-4">

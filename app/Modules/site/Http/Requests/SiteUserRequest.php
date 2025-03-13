@@ -3,6 +3,8 @@
 namespace App\Modules\site\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class SiteUserRequest extends FormRequest
 {
@@ -23,7 +25,7 @@ class SiteUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|string',
+            'email' => 'required|string|unique:users',
             'cpf' => 'required|string',
             'phone' => 'required|string',
             'cep' => 'required|string',
@@ -53,5 +55,13 @@ class SiteUserRequest extends FormRequest
                 'phone' => '55' . preg_replace('/[\s\(\)\-]/', '', $this->input('phone')),
             ]);
         }
+    }
+
+
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errorMessage = $validator->errors()->first();
+        throw new ValidationException($validator, back()->with('error', $errorMessage));
     }
 }
