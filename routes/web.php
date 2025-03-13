@@ -42,6 +42,8 @@ Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
     Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/', [AdminAuthController::class, 'index'])->name('admin.products');
 
+    Route::post('product/remove/secondary-image', [AdminProductController::class, 'removeSecondaryImage'])->name('admin.product.remove.secondary.image');
+
     Route::resource('categories', AdminCategoryController::class)->names('admin.categories');
     Route::resource('products', AdminProductController::class)->names('admin.products');
     Route::resource('users', AdminUserController::class)->names('admin.users');

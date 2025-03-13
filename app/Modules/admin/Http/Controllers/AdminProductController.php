@@ -6,8 +6,9 @@ use App\Modules\site\Http\Repositories\ProductImageRepository;
 use App\Modules\admin\Http\Repositories\CategoryRepository;
 use App\Modules\site\Http\Repositories\ProductRepository;
 use App\Modules\admin\Http\Requests\AdminProductRequest;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Product;
 use Throwable;
 
@@ -103,6 +104,20 @@ class AdminProductController extends Controller
             return response()->json(['success' => true, 'message' => 'Produto deletado com sucesso']);
         } catch (Throwable $th) {
             return response()->json(['success' => false, 'message' => $th->getMessage()]);
+        }
+    }
+
+    public function removeSecondaryImage(Request $request)
+    {
+        try {
+            $productId = $request->get('product_id');
+            $secondaryImageId = $request->get('image_id');
+
+            $this->productImageRepository->deleteSecondaryImageByProduct($productId, $secondaryImageId);
+
+            return response()->json(['success' => true, 'message' => 'Imagem deletada com sucesso']);
+        } catch (Throwable $th) {
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 500);
         }
     }
 }

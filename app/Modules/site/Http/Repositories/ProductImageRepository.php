@@ -3,6 +3,7 @@
 namespace App\Modules\site\Http\Repositories;
 
 use App\Http\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Storage;
 use App\Models\ProductImage;
 
 class ProductImageRepository extends BaseRepository
@@ -27,5 +28,18 @@ class ProductImageRepository extends BaseRepository
             ->newQuery()
             ->where('product_id', $productId)
             ->delete();
+    }
+
+    public function deleteSecondaryImageByProduct($productId, $secondaryImageId)
+    {
+        $secondaryImage = $this->model
+            ->newQuery()
+            ->where('id', $secondaryImageId)
+            ->where('product_id', $productId)
+            ->first();
+
+        Storage::disk('public')->delete($secondaryImage->image);
+
+        return $secondaryImage->delete();
     }
 }

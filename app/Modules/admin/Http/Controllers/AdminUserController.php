@@ -93,6 +93,6 @@ class AdminUserController extends Controller
     {
         $cityResponse = Http::get("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/$cityId")->json();
 
-        return $cityResponse['nome'];        
+        return isset($cityResponse['nome']) ? $cityResponse['nome'] : '';        
     }
 }
