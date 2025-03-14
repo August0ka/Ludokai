@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div>
+    <div class="overflow-x-hidden">
         <div class="flex justify-between items-center mt-5">
             <div class="text-2xl font-bold text-pumpkin-200">Vendas</div>
             <div class="my-2">
