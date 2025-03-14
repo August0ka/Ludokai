@@ -1,7 +1,7 @@
 @extends('site.layouts.app')
 
 @section('site_content')
-    <div class="mt-5">
+    <div class="mt-5 overflow-x-hidden">
         <div class="grid grid-cols-12 justify-center md:justify-start gap-1 md:gap-x-6 2xl:gap-0">
             <div
                 class="col-span-12 mx-0.5 ecommerce-gallery relative
