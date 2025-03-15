@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="overflow-x-hidden">
-    <div class="flex justify-between items-center mt-8 mb-6 md:mt-0">
+    <div class="flex justify-between items-center mt-8 mb-6 lg:mt-0">
         <div class="text-2xl font-bold text-pumpkin-200">Usuários</div>
         <div class="">
             <a href="{{ route('admin.users.create') }}"
