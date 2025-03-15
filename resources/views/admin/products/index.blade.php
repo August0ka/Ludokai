@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <div class="flex justify-between items-center mt-5">
+        <div class="flex justify-between items-center mt-8 mb-6 md:mt-0">
             <div class="text-2xl font-bold text-pumpkin-200">Produtos</div>
             <div class="my-2">
                 <a href="{{ route('admin.products.create') }}"
@@ -22,7 +22,7 @@
             </div>
         @endif
 
-        <div class="rounded-lg mt-5">
+        <div class="hidden md:block rounded-lg mt-5">
             <table class="table-auto text-sm w-full border-collapse rounded-lg overflow-hidden">
                 <thead>
                     <tr class="bg-pumpkin-800 text-gray-200">
@@ -71,6 +71,55 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="md:hidden grid grid-cols-1 gap-4">
+            @forelse($products as $product)
+                <div class="text-gray-200 odd:bg-blue-night-800 even:bg-blue-night-900 rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-lg font-medium text-gray-100">Produto #{{ $product->id }}</h3>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-200">
+                            <div class="flex justify-between">
+                                <span class="font-medium">Nome:</span>
+                                <span>{{ $product->name }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">Descrição:</span>
+                                <span>{{ $product->description }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">Preço:</span>
+                                <span>{{ $product->price }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">Categoria:</span>
+                                <span>{{ $product->category->name }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-medium">Quantidade:</span>
+                                <span>{{ $product->quantity }}</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-end space-x-2">
+                            <a href="{{ route('admin.products.edit', $product->id) }}" class="px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Editar</a>
+                            <button class="delete-button px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200"
+                                data-url="{{ route('admin.products.destroy', '') }}"
+                                value="{{ $product->id }}">
+                                Excluir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="text-gray-200 bg-blue-night-800 rounded-lg shadow p-6 text-center">
+                    <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                    <h3 class="text-xl font-medium mb-2">Nenhum produto encontrado</h3>
+                    <p class="text-gray-400 mb-4">Não há registros de produtos disponíveis no momento.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 @endsection
