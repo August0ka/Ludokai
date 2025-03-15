@@ -46,6 +46,10 @@ class AdminAuthController extends Controller
             
             return redirect()->route('admin.products.index');
         }
+
+        return back()->withErrors([
+            'login_errors' => 'Email ou senha incorretos'
+        ]);
     }
 
     public function logout()
