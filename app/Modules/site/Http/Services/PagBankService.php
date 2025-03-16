@@ -31,8 +31,9 @@ class PagBankService
 
   private function mountBody()
   {
-    $phoneNumber = mb_substr($this->customer->phone, 4);
-    $phoneArea = substr($this->customer->phone, 2, 2);
+    $phoneNumber = mb_substr($this->customer->phone, 2);
+    $phoneArea = substr($this->customer->phone, 0, 2);
+
     $productPrice = $this->product->price * 100; // Transformar em centavos
 
     $body = [
