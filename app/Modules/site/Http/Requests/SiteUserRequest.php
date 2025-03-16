@@ -85,7 +85,7 @@ class SiteUserRequest extends FormRequest
         }
         if ($this->has('phone')) {
             $this->merge([
-                'phone' => '55' . preg_replace('/[\s\(\)\-]/', '', $this->input('phone')),
+                'phone' => preg_replace('/[\s\(\)\-]/', '', $this->input('phone')),
             ]);
         }
     }
