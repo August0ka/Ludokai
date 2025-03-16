@@ -19,6 +19,11 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = $this->userRepository->fetchAll();
+
+        foreach ($users as $user) {
+            $user->cpf = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/','$1.$2.$3-$4', $user->cpf);
+        }
+
         $states = $this->getStates();
 
         foreach ($users as $user) {
