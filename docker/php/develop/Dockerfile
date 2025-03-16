@@ -20,9 +20,12 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpq-dev \
+    libmagickwand-dev \
     && docker-php-ext-install pdo_pgsql \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # install composer
@@ -33,8 +36,15 @@ RUN groupadd -g 1000 www \
     && useradd -u 1000 -ms /bin/bash -g www www
 
 # copy applications folder and set permissions
-COPY --chown=www:www . /var/www/
+COPY --chown=www:www . /var/www/ 
 RUN chown -R www-data:www-data /var/www
+
+RUN mkdir -p /var/www/storage/logs \
+    && touch /var/www/storage/logs/laravel.log \
+    && chown -R www:www-data /var/www/storage \
+    && chmod -R 775 /var/www/storage \
+    && chmod -R 775 /var/www/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/storage/logs
 
 # change current user to www
 USER www

@@ -22,9 +22,12 @@ RUN apt-get update && apt-get install -y \
     curl \
     nginx \
     libpq-dev \
+    libmagickwand-dev \
     && docker-php-ext-install pdo_pgsql \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
