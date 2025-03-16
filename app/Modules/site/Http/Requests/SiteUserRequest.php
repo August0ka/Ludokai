@@ -2,9 +2,10 @@
 
 namespace App\Modules\site\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Http;
 
 class SiteUserRequest extends FormRequest
 {
@@ -23,17 +24,49 @@ class SiteUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        if ($this->method('PUT')) {
+            $rules = [
+                'name' => 'nullable|string',
+                'email' => 'nullable|string',
+                'cpf' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                    if (!validateCPF($value)) {
+                        $fail('O CPF informado não é válido.');
+                    }
+                }],
+                'cep' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                    if (!$this->validateCEP($value)) {
+                        $fail('O CEP informado não é válido.');
+                    }
+                }],
+                'phone' => 'nullable|string',
+                'address' => 'nullable|string',
+                'city' => 'nullable|string',
+                'state' => 'nullable|string',
+                'password' => 'nullable|string'
+            ];
+            return $rules;
+        }
+        $rules = [
             'name' => 'required|string',
             'email' => 'required|string|unique:users',
-            'cpf' => 'required|string',
+            'cpf' => ['required', 'string', function ($attribute, $value, $fail) {
+                if (!validateCPF($value)) {
+                    $fail('O CPF informado não é válido.');
+                }
+            }],
+            'cep' => ['required', 'string', function ($attribute, $value, $fail) {
+                if (!$this->validateCEP($value)) {
+                    $fail('O CEP informado não é válido.');
+                }
+            }],
             'phone' => 'required|string',
-            'cep' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
             'password' => 'required|string'
         ];
+
+        return $rules;
     }
 
     protected function prepareForValidation(): void
@@ -57,11 +90,19 @@ class SiteUserRequest extends FormRequest
         }
     }
 
-
-
     protected function failedValidation(Validator $validator)
     {
         $errorMessage = $validator->errors()->first();
         throw new ValidationException($validator, back()->with('error', $errorMessage));
+    }
+
+    private function validateCEP($cep)
+    {
+        $response = Http::get("https://viacep.com.br/ws/$cep/json/")->json();
+
+        if (isset($response['erro']) && $response['erro']) {
+            return false;
+        }
+        return true;
     }
 }

@@ -100,6 +100,8 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            showError();
+
             $('#cpf').mask('000.000.000-00');
             $('#phone').mask('(00) 00000-0000');
             $('#cep').mask('00000-000');
@@ -198,6 +200,18 @@
                         }
                     });
                 });
+            }
+
+            function showError() {
+                const sessionError = "{{ session('error') ? session('error') : '' }}";
+
+                if (sessionError) {
+                    Swal.fire({
+                        title: "Atenção",
+                        text: sessionError,
+                        icon: "error",
+                    });
+                }
             }
         })
     </script>

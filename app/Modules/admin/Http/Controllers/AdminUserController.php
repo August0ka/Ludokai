@@ -3,10 +3,10 @@
 namespace App\Modules\admin\Http\Controllers;
 
 use App\Modules\site\Http\Repositories\UserRepository;
+use App\Modules\site\Http\Requests\SiteUserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
 use App\Models\User;
 use Throwable;
 
@@ -35,9 +35,9 @@ class AdminUserController extends Controller
         return view('admin.users.form', compact('states'));
     }
 
-    public function store(Request $request)
+    public function store(SiteUserRequest $request)
     {
-        $inputs = $request->except('_token');
+        $inputs = $request->validated();
 
         $this->userRepository->create($inputs);
 
@@ -51,9 +51,9 @@ class AdminUserController extends Controller
         return view('admin.users.form', compact('user', 'states'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(SiteUserRequest $request, User $user)
     {
-        $inputs = $request->except('_token', '_method');
+        $inputs = $request->validated();
 
         if (isset($inputs['password'])) {
             $inputs['password'] = Hash::make($inputs['password']);
