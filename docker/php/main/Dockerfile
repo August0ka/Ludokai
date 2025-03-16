@@ -7,29 +7,55 @@ WORKDIR /var/www
 RUN echo "upload_max_filesize = 50M" > /usr/local/etc/php/conf.d/uploads.ini && \
     echo "post_max_size = 55M" >> /usr/local/etc/php/conf.d/uploads.ini
 
-# Instala as dependências necessárias
-RUN apt-get update && apt-get install -y \
+# Atualiza os repositórios
+RUN apt-get update
+
+# Instala as dependências básicas
+RUN apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
+    zip
+
+# Instala as ferramentas de otimização de imagem
+RUN apt-get install -y \
+    jpegoptim \
+    optipng \
+    pngquant \
+    gifsicle
+
+# Instala ferramentas e utilitários
+RUN apt-get install -y \
     vim \
     unzip \
     git \
     nano \
-    curl \
-    nginx \
-    libpq-dev \
-    libmagickwand-dev \
-    && docker-php-ext-install pdo_pgsql \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install gd \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    curl
 
+# Instala nginx
+RUN apt-get install -y nginx
+
+# Instala dependências para PostgreSQL e Imagick
+RUN apt-get install -y \
+    libpq-dev \
+    libmagickwand-dev
+
+# Instala a extensão do PostgreSQL
+RUN docker-php-ext-install pdo_pgsql
+
+# Configura e instala GD
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
+RUN docker-php-ext-install gd
+
+# Instala e habilita Imagick
+RUN pecl install imagick
+RUN docker-php-ext-enable imagick
+
+# Limpa os pacotes
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Instala Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
