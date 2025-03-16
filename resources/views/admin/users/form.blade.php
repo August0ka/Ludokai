@@ -115,6 +115,7 @@
             });
 
             const stateId = $('#state').val();
+            const token = "{{ csrf_token() }}"
 
             if (stateId) {
                 const cityId = "{{ isset($user) ? $user->city : '' }}";
@@ -180,17 +181,22 @@
                 }
             }
 
-            async function setCitiesByState(stateId) {
+            async function setCitiesByState(ibgeStateId) {
                 return new Promise((resolve, reject) => {
                     $.ajax({
                         type: "GET",
-                        url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios`,
+                        url: `/admin/cities/state/${ibgeStateId}`,
+                        headers: {
+                            'X-CSRF-TOKEN': token
+                        },
                         success: function(response) {
                             $('#city').empty();
                             $('#city').append('<option value="">Selecione...</option>');
-                            response.forEach(city => {
+                            const cities = response.cities
+                             
+                            cities.forEach(city => {
                                 $('#city').append(
-                                    `<option value="${city.id}">${city.nome}</option>`
+                                    `<option value="${city.ibge_city_id}">${city.name}</option>`
                                 );
                             });
                             resolve();

@@ -2,6 +2,8 @@
 
 namespace App\Modules\admin\Http\Controllers;
 
+use App\Modules\admin\Http\Repositories\StateRepository;
+use App\Modules\admin\Http\Repositories\CityRepository;
 use App\Modules\site\Http\Repositories\UserRepository;
 use App\Modules\site\Http\Requests\SiteUserRequest;
 use App\Http\Controllers\Controller;
@@ -13,21 +15,24 @@ use Throwable;
 class AdminUserController extends Controller
 {
     public function __construct(
-        protected UserRepository $userRepository
+        protected StateRepository $stateRepository,
+        protected UserRepository $userRepository,
+        protected CityRepository $cityRepository,
     ) {}
 
     public function index()
     {
         $users = $this->userRepository->fetchAll();
-
+        
         foreach ($users as $user) {
             $user->cpf = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/','$1.$2.$3-$4', $user->cpf);
         }
-
-        $states = $this->getStates();
-
+        
+        $states = $this->stateRepository->pluck();
+        
         foreach ($users as $user) {
-            $user->city = $this->getCityName($user->city);
+            $city = $this->cityRepository->firstById($user->city);
+            $user->city = $city->name;
         }
 
         return view('admin.users.index', compact('users', 'states'));
@@ -35,7 +40,7 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        $states = $this->getStates();
+        $states = $this->stateRepository->pluck();
 
         return view('admin.users.form', compact('states'));
     }
@@ -51,7 +56,7 @@ class AdminUserController extends Controller
 
     public function edit(User $user)
     {
-        $states = $this->getStates();
+        $states = $this->stateRepository->pluck();
 
         return view('admin.users.form', compact('user', 'states'));
     }
@@ -99,5 +104,17 @@ class AdminUserController extends Controller
         $cityResponse = Http::get("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/$cityId")->json();
 
         return isset($cityResponse['nome']) ? $cityResponse['nome'] : '';        
+    }
+
+    public function getCitiesByState($ibgeStateId)
+    {
+        try {
+            $cities = $this->cityRepository->getByIbgeStateId($ibgeStateId);
+            return response()->json(['succes' => true, 'cities' => $cities]);
+
+        } catch (Throwable $th) {
+            return response()->json(['succes' => false, 'message' => $th->getMessage()], 500);
+        }
+
     }
 }

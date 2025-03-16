@@ -6,9 +6,9 @@ use App\Modules\admin\Http\Controllers\AdminAuthController;
 use App\Modules\admin\Http\Controllers\AdminSaleController;
 use App\Modules\admin\Http\Controllers\AdminUserController;
 use App\Modules\site\Http\Controllers\ProductController;
+use App\Modules\site\Http\Controllers\PagBankController;
 use App\Modules\site\Http\Controllers\AuthController;
 use App\Modules\site\Http\Controllers\HomeController;
-use App\Modules\site\Http\Controllers\PagBankController;
 use App\Modules\site\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
+    Route::get('/cities/state/{ibgeStateId}', [AdminUserController::class, 'getCitiesByState'])->name('admin.cities.by.state');
     Route::get('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/', [AdminAuthController::class, 'index'])->name('admin.products');
 
