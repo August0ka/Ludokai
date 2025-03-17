@@ -212,7 +212,7 @@
                 Swal.fire({
                     title: "Atenção",
                     text: sessionError,
-                    icon: "error",
+                    icon: "warning",
                 });
             }
         }

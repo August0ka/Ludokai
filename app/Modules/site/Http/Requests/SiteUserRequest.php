@@ -24,7 +24,7 @@ class SiteUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->method('PUT')) {
+        if ($this->method() == 'PUT') {
             $rules = [
                 'name' => 'nullable|string',
                 'email' => 'nullable|string',
@@ -38,7 +38,11 @@ class SiteUserRequest extends FormRequest
                         $fail('O CEP informado não é válido.');
                     }
                 }],
-                'phone' => 'nullable|string',
+                'phone' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                    if (!$this->validatePhone($value)) {
+                        $fail('O telefone informado não é válido.');
+                    }
+                }],
                 'address' => 'nullable|string',
                 'city' => 'nullable|string',
                 'state' => 'nullable|string',
@@ -46,6 +50,7 @@ class SiteUserRequest extends FormRequest
             ];
             return $rules;
         }
+
         $rules = [
             'name' => 'required|string',
             'email' => 'required|string|unique:users',
@@ -59,7 +64,11 @@ class SiteUserRequest extends FormRequest
                     $fail('O CEP informado não é válido.');
                 }
             }],
-            'phone' => 'required|string',
+            'phone' => ['required', 'string', function ($attribute, $value, $fail) {
+                if (!$this->validatePhone($value)) {
+                    $fail('O telefone informado não é válido.');
+                }
+            }],
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
@@ -101,6 +110,15 @@ class SiteUserRequest extends FormRequest
         $response = Http::get("https://viacep.com.br/ws/$cep/json/")->json();
 
         if (isset($response['erro']) && $response['erro']) {
+            return false;
+        }
+        return true;
+    }
+    private function validatePhone($phone)
+    {
+        $phoneNumber = substr($phone, 2);
+
+        if (!str_starts_with($phoneNumber, '9')) {
             return false;
         }
         return true;
