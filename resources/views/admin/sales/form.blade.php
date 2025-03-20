@@ -57,7 +57,8 @@
                 </div>
                 <div class="col-span-3 lg:col-span-2">
                     <label for="quantity" class="block text-sm font-medium text-pumpkin-400">Quantidade</label>
-                    <input type="number" id="quantity" name="quantity" value="{{ isset($sale) ? $sale->quantity : '' }}" min="1"
+                    <input type="number" id="quantity" name="quantity" value="{{ isset($sale) ? $sale->quantity : '' }}"
+                        min="1"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         required>
                 </div>
@@ -78,6 +79,7 @@
 
 @section('scripts')
     <script>
+        showError();
         $(document).ready(function() {
             $('#value').mask("#.##0,00", {
                 reverse: true
@@ -110,5 +112,17 @@
                 $('#total').val(total.toFixed(2).replace('.', ','));
             });
         })
+
+        function showError() {
+            const sessionError = "{{ session('error') ? session('error') : '' }}";
+
+            if (sessionError) {
+                Swal.fire({
+                    title: "Atenção",
+                    text: sessionError,
+                    icon: "error",
+                });
+            }
+        }
     </script>
 @endsection

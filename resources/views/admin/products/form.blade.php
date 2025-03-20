@@ -70,8 +70,8 @@
 
                 <div class="col-span-3 lg:col-span-2">
                     <label for="quantity" class="block text-sm font-medium text-pumpkin-400">Quantidade</label>
-                    <input type="number" id="quantity" name="quantity"
-                        value="{{ isset($product) ? $product->quantity : '' }}"
+                    <input type="number" id="quantity" name="quantity" min="1"
+                        value="{{ isset($product) ? $product->quantity : '1' }}"
                         class="mt-1 p-1.5 block w-full bg-pumpkin-100 border-gray-300 rounded-lg shadow-sm focus:ring-pumpkin-500 focus:border-pumpkin-500 sm:text-sm"
                         required>
                     @error('quantity')
