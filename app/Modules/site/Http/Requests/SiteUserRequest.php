@@ -26,9 +26,9 @@ class SiteUserRequest extends FormRequest
     {
         if ($this->method() == 'PUT') {
             $rules = [
-                'name' => 'nullable|string',
-                'email' => 'nullable|string',
-                'cpf' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                'name' => 'required|string',
+                'email' => 'required|string',
+                'cpf' => ['required', 'string', function ($attribute, $value, $fail) {
                     if (!validateCPF($value)) {
                         $fail('O CPF informado não é válido.');
                     }
@@ -114,8 +114,13 @@ class SiteUserRequest extends FormRequest
         }
         return true;
     }
+
     private function validatePhone($phone)
     {
+        if (strlen($phone) != 11) {
+            return false;
+        }
+
         $phoneNumber = substr($phone, 2);
 
         if (!str_starts_with($phoneNumber, '9')) {

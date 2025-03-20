@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sale;
 use App\Modules\site\Http\Repositories\ProductRepository;
 use App\Modules\site\Http\Repositories\UserRepository;
+use Throwable;
 
 class AdminSaleController extends Controller
 {

@@ -2,6 +2,8 @@
 
 namespace App\Modules\admin\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminProductRequest extends FormRequest
@@ -26,7 +28,7 @@ class AdminProductRequest extends FormRequest
             'description' => 'required|string',
             'price' => 'required|numeric',
             'category_id' => 'required|integer',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:1',
         ];
 
         if ($this->method() == 'PUT') {
@@ -36,12 +38,28 @@ class AdminProductRequest extends FormRequest
         $otherRules = [
             'main_image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
             'product_images' => 'required|array',
-            'product_images.*' => 'image|mimes:jpeg,png,jpg,svg,webp' 
+            'product_images.*' => 'image|mimes:jpeg,png,jpg,svg,webp'
         ];
 
         $rules = array_merge($rules, $otherRules);
 
         return $rules;
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nome',
+            'description' => 'descrição',
+            'price' => 'preço',
+            'category_id' => 'categoria',
+            'quantity' => 'quantidade',
+        ];
     }
 
     public function messages(): array
@@ -64,5 +82,11 @@ class AdminProductRequest extends FormRequest
                 'price' => str_replace(',', '.', str_replace('.', '', $this->input('price'))),
             ]);
         }
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errorMessage = $validator->errors()->first();
+        throw new ValidationException($validator, back()->with('error', $errorMessage));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Modules\admin\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminSaleRequest extends FormRequest
@@ -25,8 +27,24 @@ class AdminSaleRequest extends FormRequest
             'user_id' => 'required|integer',
             'product_id' => 'required|integer',
             'value' => 'required|numeric',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:1',
             'total' => 'required|numeric',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'user_id' => 'usuário',
+            'product_id' => 'produto',
+            'value' => 'valor',
+            'quantity' => 'quantidade',
+            'total' => 'total',
         ];
     }
 
@@ -57,5 +75,11 @@ class AdminSaleRequest extends FormRequest
                 'quantity' => (int)$this->input('quantity'),
             ]);
         }
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errorMessage = $validator->errors()->first();
+        throw new ValidationException($validator, back()->with('error', $errorMessage));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Modules\admin\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SiteSaleRequest extends FormRequest

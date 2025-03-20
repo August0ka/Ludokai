@@ -2,6 +2,8 @@
 
 namespace App\Modules\admin\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminCategoryRequest extends FormRequest
@@ -24,5 +26,11 @@ class AdminCategoryRequest extends FormRequest
         return [
             'name' => 'required|string',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errorMessage = $validator->errors()->first();
+        throw new ValidationException($validator, back()->with('error', $errorMessage));
     }
 }
