@@ -115,7 +115,7 @@
                             </div>
                             <div class="flex justify-between">
                                 <span class="font-medium">Estado:</span>
-                                <span>{{ $user->state }}</span>
+                                <span>{{ $user->state ? $states[$user->state] : '' }}</span>
                             </div>
                         </div>
                         <div class="mt-4 flex justify-end space-x-2">
